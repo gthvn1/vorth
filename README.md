@@ -1,5 +1,8 @@
 # Implement a concatenative language
 
-## Steps
+- run: `v run .`
 
+**Changelog**
+
+- Add operations: `Add`, `Sub`, `Push` and `Pop`
 - First implement a stack in [V](https://github.com/vlang/v/blob/master/doc/docs.md)
