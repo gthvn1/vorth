@@ -1,9 +1,10 @@
 # Implement a concatenative language
 
-- run: `v run .`
+- run: `v run . -i src/test1.fs`
 
 **Changelog**
 
+- Add a minimal help
 - Read the code from `test1.fs` and print the result
 - Replace `Pop` by `Dot` to be more like Forth and translate string to ops
 - Add operations: `Add`, `Sub`, `Push` and `Pop`
