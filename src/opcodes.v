@@ -13,7 +13,7 @@ type Ops = Add | Dot | Push | Sub
 fn get_ops(s string) []Ops {
 	mut o := []Ops{}
 
-	for word in s.split(' ') {
+	for word in s.split_any(' \n\t') {
 		// Skip white spaces
 		if word.is_blank() {
 			continue
@@ -29,7 +29,7 @@ fn get_ops(s string) []Ops {
 		} else if word.compare('.') == 0 {
 			o << Ops(Dot{})
 		} else {
-			println('Cannot not found ops for ${word}')
+			println('Cannot not found ops for <${word}>')
 		}
 	}
 

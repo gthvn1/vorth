@@ -1,7 +1,11 @@
+import os
+
 fn main() {
-	// Now we need to go from string to operands:
-	//	 12 30 + .  -> Push(12) Push(30) Add() Dot()
-	prog_str := '12   30 + .'
+	prog_str := os.read_file('./test1.fs')!
+	println('==== PROG START')
+	print(prog_str)
+	println('==== PROG END')
+
 	prog := get_ops(prog_str)
 	prog.run()
 }
