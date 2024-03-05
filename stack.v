@@ -13,7 +13,7 @@ mut:
 
 // As we return an address Stack is heap allocated
 // Return an empty stack
-fn alloc_stack() &Stack {
+fn init_stack() &Stack {
 	return &Stack{none}
 }
 
