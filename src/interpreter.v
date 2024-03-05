@@ -1,15 +1,3 @@
-struct Push {
-	v u8
-}
-
-struct Add {}
-
-struct Sub {}
-
-struct Pop {}
-
-type Ops = Add | Pop | Push | Sub
-
 fn (ops []Ops) run() {
 	mut s := init_stack()
 
@@ -37,7 +25,7 @@ fn (ops []Ops) run() {
 				}
 				s.push(a - b)
 			}
-			Pop { // a --
+			Dot { // a --
 				if v := s.pop() {
 					println(v)
 				} else {
