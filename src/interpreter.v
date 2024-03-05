@@ -1,3 +1,4 @@
+// https://forth-standard.org/standard/core
 fn (ops []Ops) run() {
 	mut s := init_stack()
 
