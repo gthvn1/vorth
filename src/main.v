@@ -45,7 +45,7 @@ fn main() {
 	}
 	log.debug('==== PROGRAM LOADED')
 
-	prog := get_tokens(prog_str)
+	prog := tokenize(prog_str)
 
 	if interpret {
 		prog.interpret()

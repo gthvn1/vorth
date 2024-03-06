@@ -1,6 +1,6 @@
 import log
 
-fn get_tokens(s string) []Token {
+fn tokenize(s string) []Token {
 	mut toks := []Token{}
 
 	for word in s.split_any(' \n\t') {
@@ -11,9 +11,7 @@ fn get_tokens(s string) []Token {
 
 		// Otherwise check if it is a known opcode
 		if word.is_int() {
-			// An item on the stack is an u8 so assert that for now
-			assert word.int() < 256
-			toks << Token(Push{u8(word.int())})
+			toks << Token(Push{word.int()})
 		} else if word.compare('+') == 0 {
 			toks << Token(Add{})
 		} else if word.compare('.') == 0 {
