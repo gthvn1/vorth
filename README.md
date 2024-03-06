@@ -5,7 +5,7 @@
     - [Forth](https://forth-standard.org/)
     - [Uxn](https://wiki.xxiivv.com/site/uxn.html)
 
-- run: `v run . -i src/test1.fs`
+- run: `v run . -i examples/test1.fs`
 
 ## Changelog
 
