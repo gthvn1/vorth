@@ -15,7 +15,7 @@ fn main() {
 	interpret := fp.bool('interpret', `i`, false, 'run the interpreter on the given file')
 	debug := fp.int('debug', `d`, 4, 'set debug level (max: 5, default is info (4))')
 
-	println('debug is set to ${debug}')
+	println('log level is set to ${debug}')
 
 	match debug {
 		0 { log.set_level(.disabled) }

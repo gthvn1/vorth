@@ -14,7 +14,7 @@
 ```v
 ~/devel/vlang-forth master*
 ❯ v run . -c -i -d 5 examples/test1.fs
-debug is set to 5
+log level is set to 5
 2024-03-06 18:00:33.977985 [DEBUG] ==== LOADING PROGRAM
 2024-03-06 18:00:33.978006 [DEBUG] 12 30 + .
 2024-03-06 18:00:33.978010 [DEBUG] 9 6 + .
