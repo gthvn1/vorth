@@ -1,4 +1,6 @@
 // https://forth-standard.org/standard/core
+import log
+
 fn (ops []Ops) interpret() {
 	mut s := init_stack()
 
@@ -6,22 +8,22 @@ fn (ops []Ops) interpret() {
 		match op {
 			Add { // a b -- a + b
 				b := s.pop() or {
-					println('ERROR:Add: first pop failed')
+					log.error('Add: first pop failed')
 					break
 				}
 				a := s.pop() or {
-					println('ERROR:Add: second pop failed')
+					log.error('Add: second pop failed')
 					break
 				}
 				s.push(a + b)
 			}
 			Sub { // a b -- a - b
 				b := s.pop() or {
-					println('ERROR:Sub: first pop failed')
+					log.error('Sub: first pop failed')
 					break
 				}
 				a := s.pop() or {
-					println('ERROR:Sub: second pop failed')
+					log.error('Sub: second pop failed')
 					break
 				}
 				s.push(a - b)
@@ -30,7 +32,7 @@ fn (ops []Ops) interpret() {
 				if v := s.pop() {
 					println(v)
 				} else {
-					println('Empty stack...')
+					log.error('Empty stack...')
 				}
 			}
 			Push { // -- a

@@ -1,4 +1,5 @@
 //;; https://jameshfisher.com/2018/03/10/linux-assembly-hello-world/
+import log
 import os
 
 fn (ops []Ops) compile(fname string) {
@@ -23,7 +24,7 @@ fn (ops []Ops) compile(fname string) {
 	obj := fname + '.o'
 
 	os.write_file(assembly, code) or {
-		println('failed to write file')
+		log.error('failed to write file')
 		exit(1)
 	}
 
@@ -34,5 +35,5 @@ fn (ops []Ops) compile(fname string) {
 	os.execute_or_panic(ld_cmd)
 
 	// Cleanup: keep the assembly file for debugging purpose
-	os.rm(obj) or { println('Failed to remove ${obj}') }
+	os.rm(obj) or { log.error('Failed to remove ${obj}') }
 }

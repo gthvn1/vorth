@@ -1,3 +1,5 @@
+import log
+
 struct Push {
 	v u8
 }
@@ -29,7 +31,7 @@ fn get_ops(s string) []Ops {
 		} else if word.compare('.') == 0 {
 			o << Ops(Dot{})
 		} else {
-			println('Cannot not found ops for <${word}>')
+			log.warn('Cannot not found ops for <${word}>')
 		}
 	}
 
