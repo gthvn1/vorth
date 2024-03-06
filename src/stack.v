@@ -8,7 +8,7 @@ struct Elmt {
 mut:
 	next ?&Elmt
 	prev ?&Elmt
-	v    u8
+	v    int
 }
 
 // As we return an address Stack is heap allocated
@@ -17,7 +17,7 @@ fn init_stack() &Stack {
 	return &Stack{none}
 }
 
-fn (mut s Stack) push(v u8) {
+fn (mut s Stack) push(v int) {
 	// If there is already an element the new one will become the new head
 	if mut old_head := s.head {
 		new_head := &Elmt{
@@ -34,7 +34,7 @@ fn (mut s Stack) push(v u8) {
 	}
 }
 
-fn (mut s Stack) pop() ?u8 {
+fn (mut s Stack) pop() ?int {
 	return if mut h := s.head {
 		v := h.v
 		s.head = h.prev
