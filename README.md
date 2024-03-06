@@ -11,23 +11,30 @@
     - `-c` is to compile the code. That means you can run the test: `./examples/test1`
 - or with debug logs: `v run . -c -i -d 5 examples/test1.fs`
 
-```v
-~/devel/vlang-forth master*
+```sh
+~/devel/vlang-forth master
 ❯ v run . -c -i -d 5 examples/test1.fs
 log level is set to 5
-2024-03-06 18:00:33.977985 [DEBUG] ==== LOADING PROGRAM
-2024-03-06 18:00:33.978006 [DEBUG] 12 30 + .
-2024-03-06 18:00:33.978010 [DEBUG] 9 6 + .
-2024-03-06 18:00:33.978015 [DEBUG] ? =
-2024-03-06 18:00:33.978019 [DEBUG] true false
-2024-03-06 18:00:33.978023 [DEBUG]
-2024-03-06 18:00:33.978026 [DEBUG] ==== PROGRAM LOADED
-2024-03-06 18:00:33.978034 [WARN ] Cannot not found token for < ? >
-2024-03-06 18:00:33.978037 [WARN ] Cannot not found token for < = >
-2024-03-06 18:00:33.978043 [WARN ] Found identifier < true > but it is not yet implemented
-2024-03-06 18:00:33.978047 [WARN ] Found identifier < false > but it is not yet implemented
+2024-03-06 21:59:58.202098 [DEBUG] ==== LOADING PROGRAM
+2024-03-06 21:59:58.202119 [DEBUG] 12 30 + .
+2024-03-06 21:59:58.202123 [DEBUG] 9 6 + .
+2024-03-06 21:59:58.202127 [DEBUG] ? =
+2024-03-06 21:59:58.202130 [DEBUG] true false . .
+2024-03-06 21:59:58.202132 [DEBUG]
+2024-03-06 21:59:58.202134 [DEBUG] ==== PROGRAM LOADED
+2024-03-06 21:59:58.202141 [WARN ] Cannot not found token for < ? >
+2024-03-06 21:59:58.202144 [WARN ] Cannot not found token for < = >
 42
 15
+0
+-1
+
+~/devel/vlang-forth master
+❯ ./examples/test1
+42
+15
+0
+-1
 ```
 ## Goals
 
@@ -43,6 +50,7 @@ log level is set to 5
 ## Changelog
 
 ### 2024-03-06
+- Add `False` and `True`
 - Update lexer to recognize identifiers
 - Generate code for `+`, `-`, `.`.
     - So we can print result of addition and substraction
