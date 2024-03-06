@@ -28,7 +28,7 @@ fn main() {
 
 	rp := fp.remaining_parameters()
 	if rp.len == 0 {
-		log.error('We are expecting a file name as the remaining argument')
+		log.error('We are expecting a file name as last argument')
 		exit(1)
 	}
 

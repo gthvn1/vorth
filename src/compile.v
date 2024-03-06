@@ -6,16 +6,17 @@ fn (tokens []Token) compile(fname string) {
 	mut code := ''
 
 	// First we need to generate the assembly file
-	code += '    ;; dump code generated from dump.c using https://godbolt.org and -03
-    ;; and with minor modifications:
+	code += '    ;; Code of dump has been generated from examples/dump.c using
+    ;; https://godbolt.org with -03 optimizations.
+    ;; Few small fixes were needed:
     ;;   - remove PTR
     ;;   - s/movabs/mov
     ;;   - replace the jump to an @ by jump to .dump_loop
-		;;   - replace the call to write by a syscall
+    ;;   - replace the call to write by a syscall
     BITS 64
     global _start
     section .text
-    
+
     dump:
         sub    rsp,0x28
         mov    ecx,0x1e
@@ -44,7 +45,7 @@ fn (tokens []Token) compile(fname string) {
         sub    edx,esi
         add    rsi,rsp
         mov    eax,0x1
-    		syscall
+        syscall
         add    rsp,0x28
         ret\n\n'
 
@@ -68,8 +69,8 @@ fn (tokens []Token) compile(fname string) {
 			}
 			Dot {
 				code += '        ;; DOT generated
-			  pop rdi
-			  call dump\n'
+        pop rdi
+        call dump\n'
 			}
 			Push {
 				code += '        ;; PUSH generated
