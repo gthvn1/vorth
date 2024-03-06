@@ -5,10 +5,13 @@
     - [Forth](https://forth-standard.org/)
     - [Uxn](https://wiki.xxiivv.com/site/uxn.html)
 
-- run: `v run . -i examples/test1.fs`
+- run: `v run . -c -i examples/test1.fs`
+    - `-c` is to compile the code. That means you can run the test: `./examples/test1`
 
 ## Changelog
 
+- Generate code for `+`, `-`, `.`.
+    - So we can print result of addition and substraction
 - Compile an hello world program
 - Add a minimal help
 - Read the code from `test1.fs` and print the result
