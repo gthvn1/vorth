@@ -19,32 +19,46 @@ fn (tokens []Token) compile(fname string) {
 
     dump:
         sub    rsp,0x28
-        mov    ecx,0x1e
-        mov    r9,0xcccccccccccccccd
+        mov    rcx,rdi
+        mov    r9,rdi
+        mov    esi,0x1
         mov    BYTE [rsp+0x1f],0xa
-        nop    DWORD [rax+rax*1+0x0]
-    .dump_loop:
-        mov    rax,rdi
-        mov    r8d,ecx
-        mul    r9
-        mov    rax,rdi
-        shr    rdx,0x3
-        lea    rsi,[rdx+rdx*4]
-        add    rsi,rsi
-        sub    rax,rsi
-        mov    esi,ecx
-        sub    ecx,0x1
-        add    eax,0x30
-        mov    BYTE [rsp+r8*1],al
-        mov    rax,rdi
-        mov    rdi,rdx
-        cmp    rax,0x9
-        ja     .dump_loop
-        mov    edx,0x20
+        neg    rcx
+        mov    r8,0x6666666666666667
+        cmovs  rcx,rdi
+        mov    edi,0x1e
+        nop    WORD [rax+rax*1+0x0]
+    .label1
+        mov    rax,rcx
+        mov    r10d,edi
+        imul   r8
+        mov    rax,rcx
+        sar    rax,0x3f
+        sar    rdx,0x2
+        sub    rdx,rax
+        lea    rax,[rdx+rdx*4]
+        add    rax,rax
+        sub    rcx,rax
+        mov    eax,edi
+        add    ecx,0x30
+        lea    edi,[rax-0x1]
+        mov    BYTE [rsp+r10*1],cl
+        mov    rcx,rdx
+        mov    edx,esi
+        add    esi,0x1
+        test   rcx,rcx
+        jne    .label1
+        test   r9,r9
+        jns    .label2
+        mov    eax,edi
+        lea    esi,[rdx+0x2]
+        mov    BYTE [rsp+rax*1],0x2d
+        mov    eax,edi
+    .label2
+        mov    edx,esi
         mov    edi,0x1
-        sub    edx,esi
-        add    rsi,rsp
-        mov    eax,0x1
+        lea    rsi,[rsp+rax*1]
+        mov    eax, 0x1
         syscall
         add    rsp,0x28
         ret\n\n'
