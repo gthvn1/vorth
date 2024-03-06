@@ -6,17 +6,24 @@ fn main() {
 	mut fp := flag.new_flag_parser(os.args)
 	fp.application('vlang-forth')
 	fp.version('0.0.1')
-	fp.description('Forth like interpreter')
+	fp.description('Forth like interpreter and compiler')
 	fp.usage_example('-c file.fs')
 	fp.usage_example('-i file.fs')
 	fp.skip_executable()
 
 	compile := fp.bool('compile', `c`, false, 'compile the given file')
 	interpret := fp.bool('interpret', `i`, false, 'run the interpreter on the given file')
-	debug := fp.bool('debug', `d`, false, 'set debug level')
+	debug := fp.int('debug', `d`, 4, 'set debug level (max: 5, default is info (4))')
 
-	if debug {
-		log.set_level(.debug)
+	println('debug is set to ${debug}')
+
+	match debug {
+		0 { log.set_level(.disabled) }
+		1 { log.set_level(.fatal) }
+		2 { log.set_level(.error) }
+		3 { log.set_level(.warn) }
+		4 { log.set_level(.info) }
+		else { log.set_level(.debug) }
 	}
 
 	rp := fp.remaining_parameters()
