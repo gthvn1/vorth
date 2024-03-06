@@ -6,8 +6,7 @@ fn (ops []Ops) compile(fname string) {
 	mut code := ''
 
 	// First we need to generate the assembly file
-	code += '
-    ;; dump code generated from dump.c using https://godbolt.org and -03
+	code += '    ;; dump code generated from dump.c using https://godbolt.org and -03
     ;; and with minor modifications:
     ;;   - remove PTR
     ;;   - s/movabs/mov
@@ -47,47 +46,43 @@ fn (ops []Ops) compile(fname string) {
         mov    eax,0x1
     		syscall
         add    rsp,0x28
-        ret
-'
+        ret\n\n'
 
 	code += '    _start:\n'
 
 	for op in ops {
 		match op {
 			Add {
-				code += '
-        ;; op add generated
+				code += '        ;; op add generated
         pop rax
         pop rbx
         add rbx, rax
         push rbx\n'
 			}
 			Sub {
-				code += '
-        ;; op sub generated
+				code += '        ;; op sub generated
         pop rax
         pop rbx
         sub rbx, rax
         push rbx\n'
 			}
 			Dot {
-				code += '
-        ;; op dot generated
+				code += '        ;; op dot generated
 			  pop rdi
 			  call dump\n'
 			}
 			Push {
-				code += '
-        ;; op push generated
+				code += '        ;; op push generated
         push ${op.v}\n'
 			}
 		}
 	}
 
 	code += '
-        mov rax, 60 ;; exit(
-        mov rdi, 0  ;;   EXIT_SUCCESS
-        syscall     ;; );\n'
+        ;; exit(EXIT_SUCESS)
+        mov rax, 60
+        mov rdi, 0
+        syscall\n'
 
 	// Then we can compile it
 	assembly := fname + '.s'
