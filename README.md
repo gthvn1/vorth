@@ -11,7 +11,7 @@
     - `-c` is to compile the code. That means you can run the test: `./examples/test1`
 - or with debug logs: `v run . -c -i -d 5 examples/test1.fs`
 
-```sh
+```v
 ~/devel/vlang-forth master*
 ❯ v run . -c -i -d 5 examples/test1.fs
 debug is set to 5
