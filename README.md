@@ -12,12 +12,14 @@
 
 ## Goals
 
-- [ ] Generate a turing complete language.
-    - [ ] add loop
-    - [ ] add if
-    - [ ] what else ...
-- [x] compile code
 - [x] start with simples instructions to do arithmetic
+- [x] compile code
+- [ ] update lexer to recognize new tokens `true`, `false`, `eq`, `neq`
+- [ ] implement new tokens ^^
+- [ ] add if
+- [ ] add loop
+- [ ] what else to be Turing complete?
+    - [ ] Run [Game Of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) to prove the Turing completeness
 
 ## Changelog
 
