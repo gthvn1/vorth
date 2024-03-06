@@ -5,20 +5,21 @@ import os
 fn (ops []Ops) compile(fname string) {
 	mut code := ''
 
-	code += 'global _start\n'
-	code += 'section .text\n'
-	code += '_start:\n'
-	code += '  mov rax, 1        ; write(\n'
-	code += '  mov rdi, 1        ;   STDOUT_FILENO,\n'
-	code += '  mov rsi, msg      ;   "Hello, world!",\n'
-	code += '  mov rdx, msglen   ;   sizeof("Hello, world!")\n'
-	code += '  syscall           ; );\n'
-	code += '  mov rax, 60       ; exit(\n'
-	code += '  mov rdi, 0        ;   EXIT_SUCCESS\n'
-	code += '  syscall           ; );\n'
-	code += 'section .rodata\n'
-	code += '  msg: db "Helllo, world!", 10\n'
-	code += '  msglen: equ $ - msg\n'
+	code += '
+  global _start
+  section .text
+  _start:
+    mov rax, 1        ; write(
+    mov rdi, 1        ;   STDOUT_FILENO,
+    mov rsi, msg      ;   "Hello, world!",
+    mov rdx, msglen   ;   sizeof("Hello, world!")
+    syscall           ; );
+    mov rax, 60       ; exit(
+    mov rdi, 0        ;   EXIT_SUCCESS
+    syscall           ; );
+  section .rodata
+    msg: db "Helllo, world!", 10
+    msglen: equ $ - msg\n'
 
 	assembly := fname + '.s'
 	obj := fname + '.o'
