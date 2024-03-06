@@ -93,7 +93,7 @@ fn tokenize(s string) ![]Token {
 
 				if lexer.ch.is_letter() {
 					ident := lexer.read_identifier()
-					log.warn('Found token < ${ident} > but it is not yet implemented')
+					log.warn('Found identifier < ${ident} > but it is not yet implemented')
 					continue
 				}
 

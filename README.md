@@ -9,7 +9,26 @@
 
 - run: `v run . -c -i examples/test1.fs`
     - `-c` is to compile the code. That means you can run the test: `./examples/test1`
+- or with debug logs: `v run . -c -i -d 5 examples/test1.fs`
 
+```sh
+~/devel/vlang-forth master*
+❯ v run . -c -i -d 5 examples/test1.fs
+debug is set to 5
+2024-03-06 18:00:33.977985 [DEBUG] ==== LOADING PROGRAM
+2024-03-06 18:00:33.978006 [DEBUG] 12 30 + .
+2024-03-06 18:00:33.978010 [DEBUG] 9 6 + .
+2024-03-06 18:00:33.978015 [DEBUG] ? =
+2024-03-06 18:00:33.978019 [DEBUG] true false
+2024-03-06 18:00:33.978023 [DEBUG]
+2024-03-06 18:00:33.978026 [DEBUG] ==== PROGRAM LOADED
+2024-03-06 18:00:33.978034 [WARN ] Cannot not found token for < ? >
+2024-03-06 18:00:33.978037 [WARN ] Cannot not found token for < = >
+2024-03-06 18:00:33.978043 [WARN ] Found identifier < true > but it is not yet implemented
+2024-03-06 18:00:33.978047 [WARN ] Found identifier < false > but it is not yet implemented
+42
+15
+```
 ## Goals
 
 - [x] start with simples instructions to do arithmetic
