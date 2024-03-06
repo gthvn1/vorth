@@ -60,6 +60,19 @@ fn (tokens []Token) compile(fname string) {
         add rbx, rax
         push rbx\n'
 			}
+			Dot {
+				code += '        ;; DOT generated
+        pop rdi
+        call dump\n'
+			}
+			False {
+				code += '        ;; FALSE generated
+        push ${tok.v}\n'
+			}
+			Push {
+				code += '        ;; PUSH generated
+        push ${tok.v}\n'
+			}
 			Sub {
 				code += '        ;; SUB generated
         pop rax
@@ -67,13 +80,8 @@ fn (tokens []Token) compile(fname string) {
         sub rbx, rax
         push rbx\n'
 			}
-			Dot {
-				code += '        ;; DOT generated
-        pop rdi
-        call dump\n'
-			}
-			Push {
-				code += '        ;; PUSH generated
+			True {
+				code += '        ;; TRUE generated
         push ${tok.v}\n'
 			}
 		}

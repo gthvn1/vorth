@@ -54,6 +54,14 @@ fn (mut l Lexer) read_identifier() string {
 	return l.input[pos..l.pos]
 }
 
+fn lookup(s string) ?Token {
+	return match s {
+		'true' { Token(True{0xFFFFFFFF}) }
+		'false' { Token(False{0}) }
+		else { none }
+	}
+}
+
 // Returns a list of token
 fn tokenize(s string) ![]Token {
 	mut toks := []Token{}
@@ -93,7 +101,11 @@ fn tokenize(s string) ![]Token {
 
 				if lexer.ch.is_letter() {
 					ident := lexer.read_identifier()
-					log.warn('Found identifier < ${ident} > but it is not yet implemented')
+					if tok := lookup(ident) {
+						toks << tok
+					} else {
+						log.warn('Found identifier < ${ident} > but it is not yet implemented')
+					}
 					continue
 				}
 

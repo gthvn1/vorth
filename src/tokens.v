@@ -1,11 +1,19 @@
+struct Add {}
+
+struct Dot {}
+
+struct False {
+	v int
+}
+
 struct Push {
 	v int
 }
 
-struct Add {}
-
 struct Sub {}
 
-struct Dot {}
+struct True {
+	v int
+}
 
-type Token = Add | Dot | Push | Sub
+type Token = Add | Dot | False | Push | Sub | True

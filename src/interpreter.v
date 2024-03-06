@@ -17,6 +17,19 @@ fn (tokens []Token) interpret() {
 				}
 				s.push(a + b)
 			}
+			Dot { // a --
+				if v := s.pop() {
+					println(v)
+				} else {
+					log.error('Empty stack...')
+				}
+			}
+			False {
+				s.push(tok.v)
+			}
+			Push { // -- a
+				s.push(tok.v)
+			}
 			Sub { // a b -- a - b
 				b := s.pop() or {
 					log.error('Sub: first pop failed')
@@ -28,14 +41,7 @@ fn (tokens []Token) interpret() {
 				}
 				s.push(a - b)
 			}
-			Dot { // a --
-				if v := s.pop() {
-					println(v)
-				} else {
-					log.error('Empty stack...')
-				}
-			}
-			Push { // -- a
+			True {
 				s.push(tok.v)
 			}
 		}
