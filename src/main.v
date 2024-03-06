@@ -13,16 +13,19 @@ fn main() {
 	compile := fp.bool('compile', `c`, false, 'compile the given file')
 	interpret := fp.bool('interpret', `i`, false, 'run the interpreter on the given file')
 
-	// We are expecting the file name as the remaining arguments
 	rp := fp.remaining_parameters()
-
-	file := rp[0]
-	if !os.is_readable(file) {
-		println('${file} is not readable')
+	if rp.len == 0 {
+		println('We are expecting a file name as the remaining argument')
 		exit(1)
 	}
 
-	prog_str := os.read_file(file)!
+	src_fname := rp[0]
+	if !os.is_readable(src_fname) {
+		println('${src_fname} is not readable')
+		exit(1)
+	}
+
+	prog_str := os.read_file(src_fname)!
 	println('==== PROG START')
 	print(prog_str)
 	println('==== PROG END')
@@ -36,12 +39,12 @@ fn main() {
 	}
 
 	if compile {
-		exe_name := file.all_before_last('.')
-		if exe_name == file {
+		exe_fname := src_fname.all_before_last('.')
+		if exe_fname == src_fname {
 			// Append .exe because we don't want to erase the original file :)
-			prog.compile(exe_name + '.exe')
+			prog.compile(exe_fname + '.exe')
 		} else {
-			prog.compile(exe_name)
+			prog.compile(exe_fname)
 		}
 	} else {
 		println('INFO: compilation skipped')
