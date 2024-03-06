@@ -16,19 +16,6 @@ fn main() {
 	// We are expecting the file name as the remaining arguments
 	rp := fp.remaining_parameters()
 
-	// At least compile or interpret should be selected but not both
-	// And the remaining parameters should at least have the filename in it.
-	if compile == interpret || rp.len == 0 {
-		print(fp.usage())
-		exit(1)
-	}
-
-	// Currently compilation is not implemented
-	if compile {
-		println('Compilation is not implemented')
-		exit(1)
-	}
-
 	file := rp[0]
 	if !os.is_readable(file) {
 		println('${file} is not readable')
@@ -41,5 +28,22 @@ fn main() {
 	println('==== PROG END')
 
 	prog := get_ops(prog_str)
-	prog.run()
+
+	if interpret {
+		prog.interpret()
+	} else {
+		println('INFO: interpretation skipped')
+	}
+
+	if compile {
+		exe_name := file.all_before_last('.')
+		if exe_name == file {
+			// Append .exe because we don't want to erase the original file :)
+			prog.compile(exe_name + '.exe')
+		} else {
+			prog.compile(exe_name)
+		}
+	} else {
+		println('INFO: compilation skipped')
+	}
 }

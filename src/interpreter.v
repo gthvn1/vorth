@@ -1,5 +1,5 @@
 // https://forth-standard.org/standard/core
-fn (ops []Ops) run() {
+fn (ops []Ops) interpret() {
 	mut s := init_stack()
 
 	for op in ops {
