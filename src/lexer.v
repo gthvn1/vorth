@@ -56,8 +56,8 @@ fn (mut l Lexer) read_identifier() string {
 
 fn lookup(s string) ?Token {
 	return match s {
-		'true' { Token(True{0xFFFFFFFF}) } // all bits set to 1
-		'false' { Token(False{0}) } // all bits set to 0
+		'true' { Token(True{true_value}) }
+		'false' { Token(False{false_value}) }
 		else { none }
 	}
 }
