@@ -14,7 +14,7 @@
 
 - [x] start with simples instructions to do arithmetic
 - [x] compile code
-- [ ] update lexer to recognize new tokens `true`, `false`, `eq`, `neq`
+- [x] update lexer to recognize `true`, `false`, `eq`, `neq`
 - [ ] implement new tokens ^^
 - [ ] add if
 - [ ] add loop
@@ -24,6 +24,7 @@
 ## Changelog
 
 ### 2024-03-06
+- Update lexer to recognize identifiers
 - Generate code for `+`, `-`, `.`.
     - So we can print result of addition and substraction
 - Compile an hello world program
