@@ -1,3 +1,4 @@
+// clang-format -style=llvm dump.c
 #include <unistd.h>
 
 void dump(long long value) {
