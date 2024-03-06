@@ -1,5 +1,5 @@
 struct Push {
-	v u8
+	v int
 }
 
 struct Add {}
@@ -8,4 +8,4 @@ struct Sub {}
 
 struct Dot {}
 
-type Ops = Add | Dot | Push | Sub
+type Token = Add | Dot | Push | Sub

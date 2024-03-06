@@ -2,7 +2,7 @@
 import log
 import os
 
-fn (ops []Ops) compile(fname string) {
+fn (tokens []Token) compile(fname string) {
 	mut code := ''
 
 	// First we need to generate the assembly file
@@ -50,30 +50,30 @@ fn (ops []Ops) compile(fname string) {
 
 	code += '    _start:\n'
 
-	for op in ops {
-		match op {
+	for tok in tokens {
+		match tok {
 			Add {
-				code += '        ;; op add generated
+				code += '        ;; ADD generated
         pop rax
         pop rbx
         add rbx, rax
         push rbx\n'
 			}
 			Sub {
-				code += '        ;; op sub generated
+				code += '        ;; SUB generated
         pop rax
         pop rbx
         sub rbx, rax
         push rbx\n'
 			}
 			Dot {
-				code += '        ;; op dot generated
+				code += '        ;; DOT generated
 			  pop rdi
 			  call dump\n'
 			}
 			Push {
-				code += '        ;; op push generated
-        push ${op.v}\n'
+				code += '        ;; PUSH generated
+        push ${tok.v}\n'
 			}
 		}
 	}

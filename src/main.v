@@ -32,11 +32,13 @@ fn main() {
 	}
 
 	prog_str := os.read_file(src_fname)!
-	log.debug('==== PROG START')
-	log.debug(prog_str)
-	log.debug('==== PROG END')
+	log.debug('==== LOADING PROGRAM')
+	for l in prog_str.split('\n') {
+		log.debug(l)
+	}
+	log.debug('==== PROGRAM LOADED')
 
-	prog := get_ops(prog_str)
+	prog := get_tokens(prog_str)
 
 	if interpret {
 		prog.interpret()

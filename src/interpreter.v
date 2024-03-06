@@ -1,11 +1,11 @@
 // https://forth-standard.org/standard/core
 import log
 
-fn (ops []Ops) interpret() {
+fn (tokens []Token) interpret() {
 	mut s := init_stack()
 
-	for op in ops {
-		match op {
+	for tok in tokens {
+		match tok {
 			Add { // a b -- a + b
 				b := s.pop() or {
 					log.error('Add: first pop failed')
@@ -36,7 +36,7 @@ fn (ops []Ops) interpret() {
 				}
 			}
 			Push { // -- a
-				s.push(op.v)
+				s.push(tok.v)
 			}
 		}
 	}
