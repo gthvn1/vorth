@@ -56,8 +56,8 @@ fn (mut l Lexer) read_identifier() string {
 
 fn lookup(s string) ?Token {
 	return match s {
-		'true' { Token(True{true_value}) }
-		'false' { Token(False{false_value}) }
+		'true' { Token(True{}) }
+		'false' { Token(False{}) }
 		else { none }
 	}
 }
@@ -91,6 +91,9 @@ fn tokenize(s string) ![]Token {
 			}
 			`.` {
 				toks << Token(Dot{})
+			}
+			`=` {
+				toks << Token(Eq{})
 			}
 			else {
 				if lexer.ch.is_digit() {

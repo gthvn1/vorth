@@ -24,8 +24,24 @@ fn (tokens []Token) interpret() {
 					log.error('Empty stack...')
 				}
 			}
+			Eq { // a b -- Flag
+				// (True if a == b, False otherwise)
+				b := s.pop() or {
+					log.error('Eq: first pop failed')
+					break
+				}
+				a := s.pop() or {
+					log.error('Eq: second pop failed')
+					break
+				}
+				if a == b {
+					s.push(true_value)
+				} else {
+					s.push(false_value)
+				}
+			}
 			False {
-				s.push(tok.v)
+				s.push(false_value)
 			}
 			Push { // -- a
 				s.push(tok.v)
@@ -42,7 +58,7 @@ fn (tokens []Token) interpret() {
 				s.push(a - b)
 			}
 			True {
-				s.push(tok.v)
+				s.push(true_value)
 			}
 		}
 	}

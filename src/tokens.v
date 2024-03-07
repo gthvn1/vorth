@@ -5,9 +5,9 @@ struct Add {}
 
 struct Dot {}
 
-struct False {
-	v i64
-}
+struct Eq {}
+
+struct False {}
 
 struct Push {
 	v i64
@@ -15,8 +15,6 @@ struct Push {
 
 struct Sub {}
 
-struct True {
-	v i64
-}
+struct True {}
 
-type Token = Add | Dot | False | Push | Sub | True
+type Token = Add | Dot | Eq | False | Push | Sub | True

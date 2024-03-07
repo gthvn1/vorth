@@ -49,6 +49,9 @@ log level is set to 5
 
 ## Changelog
 
+### 2024-03-07
+- Add `Eq`
+
 ### 2024-03-06
 - Add `False` and `True`
 - Update lexer to recognize identifiers

@@ -79,9 +79,20 @@ fn (tokens []Token) compile(fname string) {
         pop rdi
         call dump\n'
 			}
+			Eq {
+				code += '        ;; EQ generated
+				mov rcx, ${false_value}
+				mov rdx, ${true_value}
+				pop rax
+				pop rbx
+				cmp rax, rbx
+				cmove rcx, rdx ;; copies rdx to rcx if rax == rbx
+				push rcx
+				'
+			}
 			False {
 				code += '        ;; FALSE generated
-        push ${tok.v}\n'
+        push ${false_value}\n'
 			}
 			Push {
 				code += '        ;; PUSH generated
@@ -96,7 +107,7 @@ fn (tokens []Token) compile(fname string) {
 			}
 			True {
 				code += '        ;; TRUE generated
-        push ${tok.v}\n'
+        push ${true_value}\n'
 			}
 		}
 	}
