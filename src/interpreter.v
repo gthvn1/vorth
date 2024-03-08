@@ -6,7 +6,7 @@ fn (tokens []Token) interpret() {
 
 	for tok in tokens {
 		match tok {
-			Add { // a b -- a + b
+			Add { // a b -- (a + b)
 				b := s.pop() or {
 					log.error('Add: first pop failed')
 					break
@@ -17,7 +17,7 @@ fn (tokens []Token) interpret() {
 				}
 				s.push(a + b)
 			}
-			Divmod { // a b -- (a/b) (a%b)
+			Divmod { // a b -- (a / b) (a % b)
 				b := s.pop() or {
 					log.error('Divmod: first pop failed')
 					break
@@ -67,7 +67,7 @@ fn (tokens []Token) interpret() {
 			False {
 				s.push(false_value)
 			}
-			Mul { // a b -- a * b
+			Mul { // a b -- (a * b)
 				b := s.pop() or {
 					log.error('Mul: first pop failed')
 					break
@@ -81,7 +81,7 @@ fn (tokens []Token) interpret() {
 			Push { // -- a
 				s.push(tok.v)
 			}
-			Sub { // a b -- a - b
+			Sub { // a b -- (a - b)
 				b := s.pop() or {
 					log.error('Sub: first pop failed')
 					break
