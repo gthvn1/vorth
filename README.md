@@ -21,7 +21,7 @@
 | dup       | a -- a a               |
 | =         | a b -- Flag            |
 | *         | a b -- (a * b)         |
-| <integer> | -- a                   |
+| *integer* | -- a                   |
 | -         | a b -- (a - b)         |
 | swap      | a b -- b a             |
 
