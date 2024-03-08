@@ -66,8 +66,12 @@ fn (mut l Lexer) skip_comments() {
 
 fn lookup(s string) ?Token {
 	return match s {
-		'true' { Token(True{}) }
+		'divmod' { Token(Divmod{}) }
+		'dup' { Token(Dup{}) }
 		'false' { Token(False{}) }
+		'mul' { Token(Mul{}) }
+		'true' { Token(True{}) }
+		'swap' { Token(Swap{}) }
 		else { none }
 	}
 }
@@ -98,6 +102,9 @@ fn tokenize(s string) ![]Token {
 			}
 			`-` {
 				toks << Token(Sub{})
+			}
+			`*` {
+				toks << Token(Mul{})
 			}
 			`.` {
 				toks << Token(Dot{})

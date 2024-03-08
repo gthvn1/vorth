@@ -11,24 +11,46 @@
     - `-c` is to compile the code. That means you can run the test: `./examples/arithmetic`
 - or with debug logs: `v run . -c -i -d 5 examples/arithmetic.vforth`
 
-```sh
-~/devel/vlang-forth master* ⇡
+```v
+~/devel/vlang-forth master*
 ❯ v run . -c -i -d 5 examples/arithmetic.vforth
 log level is set to 5
-2024-03-08 18:26:16.509224 [DEBUG] ==== LOADING PROGRAM
-2024-03-08 18:26:16.509258 [DEBUG] // arithmetic.vforth
-2024-03-08 18:26:16.509261 [DEBUG]
-2024-03-08 18:26:16.509265 [DEBUG] 12 30 + . // should print 42
-2024-03-08 18:26:16.509268 [DEBUG] 6 9 - .   // should print -3
-2024-03-08 18:26:16.509271 [DEBUG]
-2024-03-08 18:26:16.509273 [DEBUG] ==== PROGRAM LOADED
+2024-03-08 22:05:41.692216 [DEBUG] ==== LOADING PROGRAM
+2024-03-08 22:05:41.692242 [DEBUG] // arithmetic.vforth
+2024-03-08 22:05:41.692245 [DEBUG]
+2024-03-08 22:05:41.692249 [DEBUG] 12 30 + .      // should print 42
+2024-03-08 22:05:41.692251 [DEBUG] 6 9 - .        // should print -3
+2024-03-08 22:05:41.692254 [DEBUG] 12 dup + .     // should print 24
+2024-03-08 22:05:41.692256 [DEBUG] 15 10 - .      // should print 5
+2024-03-08 22:05:41.692258 [DEBUG] 15 10 swap - . // should print -5
+2024-03-08 22:05:41.692261 [DEBUG] 5 dup mul .    // it is the square operation, 25
+2024-03-08 22:05:41.692264 [DEBUG] 8 0 3 - * .    // should print -24
+2024-03-08 22:05:41.692267 [DEBUG] 117 17 divmod . . // 117 17 -- 6 15
+2024-03-08 22:05:41.692270 [DEBUG]                   // where 6 is the quotient and 15 the reminder
+2024-03-08 22:05:41.692275 [DEBUG]                   // So should print 15 6
+2024-03-08 22:05:41.692278 [DEBUG]
+2024-03-08 22:05:41.692287 [DEBUG] ==== PROGRAM LOADED
 42
 -3
+24
+5
+-5
+25
+-24
+15
+6
 
-~/devel/vlang-forth master* ⇡
+~/devel/vlang-forth master*
 ❯ ./examples/arithmetic
 42
 -3
+24
+5
+-5
+25
+-24
+15
+6
 ```
 
 - others examples are not all ready. Check comments in the files.
@@ -48,7 +70,7 @@ log level is set to 5
 ## Changelog
 
 ### 2024-03-07
-- Add `Eq`
+- Add `Eq`, `Dup`, `Swap`, `Mul`, `Divmod`
 
 ### 2024-03-06
 - Add `False` and `True`

@@ -1,4 +1,12 @@
 // arithmetic.vforth
 
-12 30 + . // should print 42
-6 9 - .   // should print -3
+12 30 + .      // should print 42
+6 9 - .        // should print -3
+12 dup + .     // should print 24
+15 10 - .      // should print 5
+15 10 swap - . // should print -5
+5 dup mul .    // it is the square operation, 25
+8 0 3 - * .    // should print -24
+117 17 divmod . . // 117 17 -- 6 15
+                  // where 6 is the quotient and 15 the reminder
+                  // So should print 15 6

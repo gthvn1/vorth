@@ -74,10 +74,27 @@ fn (tokens []Token) compile(fname string) {
         add rbx, rax
         push rbx\n'
 			}
+			Divmod {
+				code += '        ;; Divmod generated
+				xor rdx, rdx
+				pop rbx
+				pop rax
+				div rbx  ; RAX: Quotient, RDX: Remainder
+				push rax
+				push rdx\n
+				'
+			}
 			Dot {
 				code += '        ;; DOT generated
         pop rdi
         call dump\n'
+			}
+			Dup {
+				code += '        ;; DUP generated
+				pop rax
+				push rax
+				push rax
+				'
 			}
 			Eq {
 				code += '        ;; EQ generated
@@ -94,6 +111,14 @@ fn (tokens []Token) compile(fname string) {
 				code += '        ;; FALSE generated
         push ${false_value}\n'
 			}
+			Mul {
+				code += '        ;; MUL generated
+				pop rax
+				pop rbx
+				mul rbx  ;; result is stored in rax
+				push rax
+				'
+			}
 			Push {
 				code += '        ;; PUSH generated
         push ${tok.v}\n'
@@ -104,6 +129,13 @@ fn (tokens []Token) compile(fname string) {
         pop rbx
         sub rbx, rax
         push rbx\n'
+			}
+			Swap {
+				code += '        ;; SWAP generated
+				pop rbx
+				pop rax
+				push rbx
+				push rax\n'
 			}
 			True {
 				code += '        ;; TRUE generated
