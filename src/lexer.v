@@ -54,6 +54,16 @@ fn (mut l Lexer) read_identifier() string {
 	return l.input[pos..l.pos]
 }
 
+fn (mut l Lexer) skip_comments() {
+	for {
+		if l.ch == `\n` {
+			break
+		} else {
+			l.read_char()
+		}
+	}
+}
+
 fn lookup(s string) ?Token {
 	return match s {
 		'true' { Token(True{}) }
@@ -95,10 +105,22 @@ fn tokenize(s string) ![]Token {
 			`=` {
 				toks << Token(Eq{})
 			}
+			`/` {
+				if lexer.peek_char() == `/` {
+					// Skip comments ends on `\n` so don't continue because we need to
+					// read the next caracter.
+					lexer.skip_comments()
+				} else {
+					ch_str := lexer.ch.ascii_str()
+					log.warn('Cannot not found token for < ${ch_str} >')
+				}
+			}
 			else {
 				if lexer.ch.is_digit() {
 					i := lexer.read_integer()!
 					toks << Token(Push{i})
+					// after reading integer lexer is on the corrent next character so
+					// restart the loop now
 					continue
 				}
 
@@ -109,6 +131,8 @@ fn tokenize(s string) ![]Token {
 					} else {
 						log.warn('Found identifier < ${ident} > but it is not yet implemented')
 					}
+					// after reading identifier lexer is on the corrent next character so
+					// restart the loop now
 					continue
 				}
 

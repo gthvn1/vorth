@@ -1,0 +1,4 @@
+// arithmetic.vforth
+
+12 30 + . // should print 42
+6 9 - .   // should print -3

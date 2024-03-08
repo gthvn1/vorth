@@ -1,0 +1,3 @@
+// comparison.vforth
+11 12 = .  // should return false that is 0
+32 32 = .  // should return true that is all bits set to 1 => -1
