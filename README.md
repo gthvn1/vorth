@@ -11,7 +11,7 @@
     - `-c` is to compile the code. That means you can run the test: `./examples/arithmetic`
 - or with debug logs: `v run . -c -i -d 5 examples/arithmetic.vforth`
 
-- List of operators
+## List of operators
 
 | Operators | stack state            |
 | --------- | ---------------------- |
@@ -24,6 +24,8 @@
 | <integer> | -- a                   |
 | -         | a b -- (a - b)         |
 | swap      | a b -- b a             |
+
+## Example
 
 ```v
 ~/devel/vlang-forth master*
