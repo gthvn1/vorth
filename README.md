@@ -7,41 +7,37 @@
     - [Forth](https://forth-standard.org/)
     - [Uxn](https://wiki.xxiivv.com/site/uxn.html)
 
-- run: `v run . -c -i examples/test1.fs`
-    - `-c` is to compile the code. That means you can run the test: `./examples/test1`
-- or with debug logs: `v run . -c -i -d 5 examples/test1.fs`
+- run: `v run . -c -i examples/arithmetic.fs`
+    - `-c` is to compile the code. That means you can run the test: `./examples/arithmetic`
+- or with debug logs: `v run . -c -i -d 5 examples/arithmetic.fs`
 
 ```sh
-~/devel/vlang-forth master
-❯ v run . -c -i -d 5 examples/test1.fs
+~/devel/vlang-forth master*
+❯ v run . -c -i -d 5 examples/arithmetic.fs
 log level is set to 5
-2024-03-06 21:59:58.202098 [DEBUG] ==== LOADING PROGRAM
-2024-03-06 21:59:58.202119 [DEBUG] 12 30 + .
-2024-03-06 21:59:58.202123 [DEBUG] 9 6 + .
-2024-03-06 21:59:58.202127 [DEBUG] ? =
-2024-03-06 21:59:58.202130 [DEBUG] true false . .
-2024-03-06 21:59:58.202132 [DEBUG]
-2024-03-06 21:59:58.202134 [DEBUG] ==== PROGRAM LOADED
-2024-03-06 21:59:58.202141 [WARN ] Cannot not found token for < ? >
-2024-03-06 21:59:58.202144 [WARN ] Cannot not found token for < = >
+2024-03-08 18:02:11.195028 [DEBUG] ==== LOADING PROGRAM
+2024-03-08 18:02:11.195047 [DEBUG] 12 30 + .
+2024-03-08 18:02:11.195051 [DEBUG] 6 9 - .
+2024-03-08 18:02:11.195054 [DEBUG]
+2024-03-08 18:02:11.195057 [DEBUG] ==== PROGRAM LOADED
 42
-15
-0
--1
+-3
 
-~/devel/vlang-forth master
-❯ ./examples/test1
+~/devel/vlang-forth master*
+❯ ./examples/arithmetic
 42
-15
-0
--1
+-3
 ```
+
+- others examples are not running yet.
+
 ## Goals
 
 - [x] start with simples instructions to do arithmetic
 - [x] compile code
 - [x] update lexer to recognize `true`, `false`, `eq`, `neq`
 - [ ] implement new tokens ^^
+- [ ] allow comments
 - [ ] add if
 - [ ] add loop
 - [ ] what else to be Turing complete?
@@ -61,7 +57,7 @@ log level is set to 5
 
 ### 2024-03-05
 - Add a minimal help
-- Read the code from `test1.fs` and print the result
+- Read the code from `arithmetic.fs` and print the result
 - Replace `Pop` by `Dot` to be more like Forth and translate string to ops
 - Add operations: `Add`, `Sub`, `Push` and `Pop`
 - First implement a stack in [V](https://github.com/vlang/v/blob/master/doc/docs.md)
