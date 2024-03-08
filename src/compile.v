@@ -76,13 +76,12 @@ fn (tokens []Token) compile(fname string) {
 			}
 			Divmod {
 				code += '        ;; Divmod generated
-				xor rdx, rdx
-				pop rbx
-				pop rax
-				div rbx  ; RAX: Quotient, RDX: Remainder
-				push rax
-				push rdx\n
-				'
+        xor rdx, rdx
+        pop rbx
+        pop rax
+        div rbx  ; RAX: Quotient, RDX: Remainder
+        push rax
+        push rdx\n'
 			}
 			Dot {
 				code += '        ;; DOT generated
@@ -91,21 +90,19 @@ fn (tokens []Token) compile(fname string) {
 			}
 			Dup {
 				code += '        ;; DUP generated
-				pop rax
-				push rax
-				push rax
-				'
+        pop rax
+        push rax
+        push rax\n'
 			}
 			Eq {
 				code += '        ;; EQ generated
-				mov rcx, ${false_value}
-				mov rdx, ${true_value}
-				pop rax
-				pop rbx
-				cmp rax, rbx
-				cmove rcx, rdx ;; copies rdx to rcx if rax == rbx
-				push rcx
-				'
+        mov rcx, ${false_value}
+        mov rdx, ${true_value}
+        pop rax
+        pop rbx
+        cmp rax, rbx
+        cmove rcx, rdx ;; copies rdx to rcx if rax == rbx
+        push rcx\n'
 			}
 			False {
 				code += '        ;; FALSE generated
@@ -113,11 +110,10 @@ fn (tokens []Token) compile(fname string) {
 			}
 			Mul {
 				code += '        ;; MUL generated
-				pop rax
-				pop rbx
-				mul rbx  ;; result is stored in rax
-				push rax
-				'
+        pop rax
+        pop rbx
+        mul rbx  ;; result is stored in rax
+        push rax\n'
 			}
 			Push {
 				code += '        ;; PUSH generated
@@ -132,10 +128,10 @@ fn (tokens []Token) compile(fname string) {
 			}
 			Swap {
 				code += '        ;; SWAP generated
-				pop rbx
-				pop rax
-				push rbx
-				push rax\n'
+        pop rbx
+        pop rax
+        push rbx
+        push rax\n'
 			}
 			True {
 				code += '        ;; TRUE generated
