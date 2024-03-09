@@ -24,7 +24,7 @@
 | divmod    | a b -- (a / b) (a % b) |
 | dot       | a --                   |
 | dup       | a -- a a               |
-| *integer* | -- a                   |
+| *integer* | -- a                   | *integer* is i64
 | swap      | a b -- b a             |
 
 ## Example
