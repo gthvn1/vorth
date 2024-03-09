@@ -108,6 +108,26 @@ fn (tokens []Token) compile(fname string) {
 				code += '        ;; FALSE generated
         push ${false_value}\n'
 			}
+			Gth {
+				code += '        ;; GTH generated
+        mov rcx, ${false_value}
+        mov rdx, ${true_value}
+        pop rbx
+        pop rax
+        cmp rax, rbx
+        cmovg rcx, rdx ; if rax > rbx then rcx <- true
+        push rcx\n'
+			}
+			Lth {
+				code += '        ;; LTH generated
+        mov rcx, ${false_value}
+        mov rdx, ${true_value}
+        pop rbx
+        pop rax
+        cmp rax, rbx
+        cmovl rcx, rdx ; if rax < rbx then rcx <- true
+        push rcx\n'
+			}
 			Mul {
 				code += '        ;; MUL generated
         pop rax

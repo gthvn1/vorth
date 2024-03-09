@@ -112,6 +112,12 @@ fn tokenize(s string) ![]Token {
 			`=` {
 				toks << Token(Eq{})
 			}
+			`<` {
+				toks << Token(Lth{})
+			}
+			`>` {
+				toks << Token(Gth{})
+			}
 			`/` {
 				if lexer.peek_char() == `/` {
 					// Skip comments ends on `\n` so don't continue because we need to

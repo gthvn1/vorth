@@ -1,3 +1,7 @@
 // comparison.vforth
 11 12 = .  // should return false that is 0
 32 32 = .  // should return true that is all bits set to 1 => -1
+12 36 < .  // should print true (-1)
+52 36 < .  // should print false (0)
+72 31 > .  // should print true (-1)
+12 96 > .  // should print false (0)

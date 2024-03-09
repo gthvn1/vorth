@@ -48,7 +48,8 @@ fn (tokens []Token) interpret() {
 				s.push(a)
 				s.push(a)
 			}
-			Eq { // a b -- Flag
+			Eq {
+				// a b -- Flag
 				// (True if a == b, False otherwise)
 				b := s.pop() or {
 					log.error('Eq: first pop failed')
@@ -66,6 +67,44 @@ fn (tokens []Token) interpret() {
 			}
 			False {
 				s.push(false_value)
+			}
+			Gth {
+				// a b -- Flag
+				// (True if a > b, False otherwise)
+				b := s.pop() or {
+					log.error('Gth: first pop failed')
+					break
+				}
+
+				a := s.pop() or {
+					log.error('Gth: second pop failed')
+					break
+				}
+
+				if a > b {
+					s.push(true_value)
+				} else {
+					s.push(false_value)
+				}
+			}
+			Lth {
+				// a b -- Flag
+				// (True if a < b, False otherwise)
+				b := s.pop() or {
+					log.error('Lth: first pop failed')
+					break
+				}
+
+				a := s.pop() or {
+					log.error('Lth: second pop failed')
+					break
+				}
+
+				if a < b {
+					s.push(true_value)
+				} else {
+					s.push(false_value)
+				}
 			}
 			Mul { // a b -- (a * b)
 				b := s.pop() or {
