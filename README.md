@@ -13,16 +13,18 @@
 
 ## List of operators
 
-| Operators | stack state            |
-| --------- | ---------------------- |
-| +         | a b -- (a + b)         |
+| Operators | stack state            | Description
+| --------- | ---------------------- | ------------
+| `+`       | a b -- (a + b)         |
+| `*`       | a b -- (a * b)         |
+| `-`       | a b -- (a - b)         |
+| `=`       | a b -- Flag            | True if a == b, False otherwise
+| `<`       | a b -- Flag            | True if a < b, False otherwise
+| `>`       | a b -- Flag            | True if a > b, False otherwise
 | divmod    | a b -- (a / b) (a % b) |
 | dot       | a --                   |
 | dup       | a -- a a               |
-| =         | a b -- Flag            |
-| *         | a b -- (a * b)         |
 | *integer* | -- a                   |
-| -         | a b -- (a - b)         |
 | swap      | a b -- b a             |
 
 ## Example
@@ -86,7 +88,7 @@ log level is set to 5
 ## Changelog
 
 ### 2024-03-07
-- Add `Eq`, `Dup`, `Swap`, `Mul`, `Divmod`
+- Add `Eq`, `Dup`, `Swap`, `Mul`, `Divmod`, `Gth`, `Lth`
 
 ### 2024-03-06
 - Add `False` and `True`

@@ -11,6 +11,12 @@ struct Dup {}
 
 struct Eq {}
 
+// Greater than
+struct Gth {}
+
+// Lower than
+struct Lth {}
+
 struct False {}
 
 struct Mul {}
@@ -25,4 +31,4 @@ struct Swap {}
 
 struct True {}
 
-type Token = Add | Divmod | Dot | Dup | Eq | False | Mul | Push | Sub | Swap | True
+type Token = Add | Divmod | Dot | Dup | Eq | False | Gth | Lth | Mul | Push | Sub | Swap | True
