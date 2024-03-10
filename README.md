@@ -19,6 +19,7 @@
 | `*`       | a b -- (a * b)         |
 | `-`       | a b -- (a - b)         |
 | `=`       | a b -- Flag            | True if a == b, False otherwise
+| `!=`      | a b -- Flag            | True if a != b, False otherwise
 | `<`       | a b -- Flag            | True if a < b, False otherwise
 | `>`       | a b -- Flag            | True if a > b, False otherwise
 | divmod    | a b -- (a / b) (a % b) |
@@ -78,7 +79,7 @@ log level is set to 5
 - [x] start with simples instructions to do arithmetic
 - [x] compile code
 - [x] update lexer to recognize `true`, `false`, `eq`, `neq`
-- [ ] implement new tokens ^^
+- [x] implement new tokens ^^
 - [x] allow comments
 - [ ] add if
 - [ ] add loop
@@ -88,7 +89,7 @@ log level is set to 5
 ## Changelog
 
 ### 2024-03-07
-- Add `Eq`, `Dup`, `Swap`, `Mul`, `Divmod`, `Gth`, `Lth`
+- Add `Eq`, `Neq`, `Dup`, `Swap`, `Mul`, `Divmod`, `Gth`, `Lth`
 
 ### 2024-03-06
 - Add `False` and `True`

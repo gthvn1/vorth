@@ -135,6 +135,16 @@ fn (tokens []Token) compile(fname string) {
         mul rbx  ;; result is stored in rax
         push rax\n'
 			}
+			Neq {
+				code += '        ;; NEQ is not implemented
+        mov rcx, ${false_value}
+        mov rdx, ${true_value}
+        pop rax
+        pop rbx
+        cmp rax, rbx
+        cmovne rcx, rdx ;; copies rdx to rcx if rax != rbx
+        push rcx\n'
+			}
 			Push {
 				code += '        ;; PUSH generated
         push ${tok.v}\n'

@@ -117,6 +117,23 @@ fn (tokens []Token) interpret() {
 				}
 				s.push(a * b)
 			}
+			Neq {
+				// a b -- Flag
+				// (True if a != b, False otherwise)
+				b := s.pop() or {
+					log.error('Neq: first pop failed')
+					break
+				}
+				a := s.pop() or {
+					log.error('Neq: second pop failed')
+					break
+				}
+				if a != b {
+					s.push(true_value)
+				} else {
+					s.push(false_value)
+				}
+			}
 			Push { // -- a
 				s.push(tok.v)
 			}

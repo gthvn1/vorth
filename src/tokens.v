@@ -19,6 +19,8 @@ struct Lth {}
 
 struct False {}
 
+struct Neq {}
+
 struct Mul {}
 
 struct Push {
@@ -31,4 +33,17 @@ struct Swap {}
 
 struct True {}
 
-type Token = Add | Divmod | Dot | Dup | Eq | False | Gth | Lth | Mul | Push | Sub | Swap | True
+type Token = Add
+	| Divmod
+	| Dot
+	| Dup
+	| Eq
+	| False
+	| Gth
+	| Lth
+	| Mul
+	| Neq
+	| Push
+	| Sub
+	| Swap
+	| True

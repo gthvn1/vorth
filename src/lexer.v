@@ -124,8 +124,22 @@ fn tokenize(s string) ![]Token {
 					// read the next caracter.
 					lexer.skip_comments()
 				} else {
-					ch_str := lexer.ch.ascii_str()
-					log.warn('Cannot not found token for < ${ch_str} >')
+					// Just log the identifier that starts with /
+					ident := lexer.read_identifier()
+					log.warn('Cannot not found token for < ${ident} >')
+					break
+				}
+			}
+			`!` {
+				if lexer.peek_char() == `=` {
+					lexer.read_char()
+					toks << Token(Neq{})
+					// No need to continue because we only read the = character
+				} else {
+					// Just log the identifier that starts with !
+					ident := lexer.read_identifier()
+					log.warn('Cannot not found token for < ${ident} >')
+					break
 				}
 			}
 			else {
@@ -151,6 +165,7 @@ fn tokenize(s string) ![]Token {
 
 				ch_str := lexer.ch.ascii_str()
 				log.warn('Cannot not found token for < ${ch_str} >')
+				break
 			}
 		}
 
