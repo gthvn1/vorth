@@ -88,6 +88,9 @@ log level is set to 5
 
 ## Changelog
 
+### 2024-03-10
+- Report `filename:line:col:<error msg>` in case of error
+
 ### 2024-03-07
 - Add `Eq`, `Neq`, `Dup`, `Swap`, `Mul`, `Divmod`, `Gth`, `Lth`
 

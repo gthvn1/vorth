@@ -33,19 +33,10 @@ fn main() {
 	}
 
 	src_fname := rp[0]
-	if !os.is_readable(src_fname) {
-		log.error('${src_fname} is not readable')
+	prog := tokenize(src_fname) or {
+		println(err)
 		exit(1)
 	}
-
-	prog_str := os.read_file(src_fname)!
-	log.debug('==== LOADING PROGRAM')
-	for l in prog_str.split('\n') {
-		log.debug(l)
-	}
-	log.debug('==== PROGRAM LOADED')
-
-	prog := tokenize(prog_str)!
 
 	if interpret {
 		prog.interpret()

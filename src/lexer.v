@@ -1,4 +1,5 @@
 import log
+import os
 
 struct Lexer {
 	input string
@@ -6,6 +7,13 @@ mut:
 	pos      int // current position in input
 	read_pos int // current reading position (after current char)
 	ch       u8  // the current char
+	line     int
+	column   int
+	src      string
+}
+
+fn (mut l Lexer) tok_error(err string) ![]Token {
+	return error(l.src + ':' + l.line.str() + ':' + l.column.str() + ':' + err)
 }
 
 // Move current position to the next one
@@ -16,6 +24,12 @@ fn (mut l Lexer) read_char() {
 		l.ch = l.input[l.read_pos]
 		l.pos = l.read_pos
 		l.read_pos++
+		if l.ch == `\n` {
+			l.line += 1
+			l.column = 1
+		} else {
+			l.column += 1
+		}
 	}
 }
 
@@ -77,13 +91,27 @@ fn lookup(s string) ?Token {
 }
 
 // Returns a list of token
-fn tokenize(s string) ![]Token {
+fn tokenize(src_fname string) ![]Token {
+	if !os.is_readable(src_fname) {
+		return error('${src_fname} is not readable')
+	}
+
+	prog_str := os.read_file(src_fname)!
+	log.debug('==== LOADING PROGRAM')
+	for l in prog_str.split('\n') {
+		log.debug(l)
+	}
+	log.debug('==== PROGRAM LOADED')
+
 	mut toks := []Token{}
 	mut lexer := Lexer{
-		input: s
+		input: prog_str
 		pos: 0
 		read_pos: 1
-		ch: s[0]
+		ch: prog_str[0]
+		line: 1
+		column: 1
+		src: src_fname
 	}
 
 	for {
@@ -124,10 +152,8 @@ fn tokenize(s string) ![]Token {
 					// read the next caracter.
 					lexer.skip_comments()
 				} else {
-					// Just log the identifier that starts with /
 					ident := lexer.read_identifier()
-					log.warn('Cannot not found token for < ${ident} >')
-					break
+					return lexer.tok_error('cannot not found token for < ${ident} >')
 				}
 			}
 			`!` {
@@ -137,9 +163,7 @@ fn tokenize(s string) ![]Token {
 					// No need to continue because we only read the = character
 				} else {
 					// Just log the identifier that starts with !
-					ident := lexer.read_identifier()
-					log.warn('Cannot not found token for < ${ident} >')
-					break
+					return lexer.tok_error('only != is expected')
 				}
 			}
 			else {
@@ -156,7 +180,7 @@ fn tokenize(s string) ![]Token {
 					if tok := lookup(ident) {
 						toks << tok
 					} else {
-						log.warn('Found identifier < ${ident} > but it is not yet implemented')
+						return lexer.tok_error('unknown identifier < ${ident} >')
 					}
 					// after reading identifier lexer is on the corrent next character so
 					// restart the loop now
@@ -164,8 +188,7 @@ fn tokenize(s string) ![]Token {
 				}
 
 				ch_str := lexer.ch.ascii_str()
-				log.warn('Cannot not found token for < ${ch_str} >')
-				break
+				return lexer.tok_error('cannot not found token for < ${ch_str} >')
 			}
 		}
 
