@@ -34,12 +34,12 @@ fn main() {
 
 	src_fname := rp[0]
 	prog := tokenize(src_fname) or {
-		println(err)
+		log.error('tokenizer failed: ' + err.str())
 		exit(1)
 	}
 
 	if interpret {
-		prog.interpret()
+		prog.interpret() or { log.error('interpreter failed: ' + err.str()) }
 	} else {
 		log.info('interpretation skipped')
 	}

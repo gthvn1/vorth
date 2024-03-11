@@ -84,6 +84,7 @@ fn lookup(s string) ?Token {
 		'dup' { Token(Dup{}) }
 		'false' { Token(False{}) }
 		'mul' { Token(Mul{}) }
+		'not' { Token(Not{}) }
 		'true' { Token(True{}) }
 		'swap' { Token(Swap{}) }
 		else { none }

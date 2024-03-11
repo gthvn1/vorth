@@ -1,13 +1,12 @@
 // if_block.vforth
 // !!! NOT YET IMPLEMENTED !!!
-// Even the syntax is not yet 100% sure... We are just writing code to check how
-// it looks...
 
-10 13 >
-if
+10 13 >           // false
+dup neg swap      // true false
+?[
   10 13 -
-else
-  10 13 +
-end
+]
+?[  10 13 +
+]
 
 .

@@ -135,6 +135,15 @@ fn (tokens []Token) compile(fname string) {
         mul rbx  ;; result is stored in rax
         push rax\n'
 			}
+			Not {
+				code += '        ;; NOT generated
+				mov rcx, ${false_value}
+        mov rbx, ${true_value}
+        pop rax
+        cmp rax, rbx
+        cmove rbx, rcx
+        push rbx\n'
+			}
 			Neq {
 				code += '        ;; NEQ is not implemented
         mov rcx, ${false_value}

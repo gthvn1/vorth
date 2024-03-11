@@ -26,6 +26,7 @@
 | dot       | a --                   |
 | dup       | a -- a a               |
 | *integer* | -- a                   | *integer* is i64
+| not       | Flag -- not Flag       | Inverse True and False
 | swap      | a b -- b a             |
 
 ## Example
@@ -92,7 +93,7 @@ log level is set to 5
 - Report `filename:line:col:<error msg>` in case of error
 
 ### 2024-03-07
-- Add `Eq`, `Neq`, `Dup`, `Swap`, `Mul`, `Divmod`, `Gth`, `Lth`
+- Add `Eq`, `Neq`, `Dup`, `Swap`, `Mul`, `Divmod`, `Gth`, `Lth`, `Not`
 
 ### 2024-03-06
 - Add `False` and `True`

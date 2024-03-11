@@ -21,6 +21,8 @@ struct False {}
 
 struct Neq {}
 
+struct Not {}
+
 struct Mul {}
 
 struct Push {
@@ -43,6 +45,7 @@ type Token = Add
 	| Lth
 	| Mul
 	| Neq
+	| Not
 	| Push
 	| Sub
 	| Swap
