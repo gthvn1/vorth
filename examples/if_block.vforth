@@ -1,6 +1,0 @@
-// if_block.vforth
-
-true ?[ 10 11 + ]
-false ?[ 2 3 + ]
-true ?[ 21 + ]
-. // should print 42

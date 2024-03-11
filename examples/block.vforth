@@ -1,0 +1,16 @@
+// block.vforth
+
+// IF
+true ?[ 10 11 + ]
+false ?[ 2 3 + ]
+true ?[ 21 + ]
+. // should print 42
+
+// LOOP
+// start end ![ ... ]
+
+// Example print 1 to 10
+1 10 ![
+  @   // push the current index on the stack
+  .   // print it
+]
