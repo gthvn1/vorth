@@ -19,7 +19,7 @@ struct Gth {}
 
 struct If {
 mut:
-	end int // The position in the array of tokens of the end of the if block
+	out int // The position in the array of tokens of the end of the if block
 }
 
 // Lower than

@@ -71,7 +71,7 @@ fn (tokens []Token) interpret() ! {
 				// flag --
 				f := s.pop() or { return error('If: empty stack') }
 				if f == false_value {
-					token_idx = tok.end + 1 // jump right after the end
+					token_idx = tok.out + 1 // jump right after the end
 					continue
 				}
 			}
