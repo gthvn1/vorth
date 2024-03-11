@@ -4,7 +4,11 @@ import log
 fn (tokens []Token) interpret() ! {
 	mut s := init_stack()
 
-	for tok in tokens {
+	mut token_idx := 0
+
+	for {
+		tok := tokens[token_idx]
+
 		match tok {
 			Add { // a b -- (a + b)
 				b := s.pop() or { return error('Add: first pop failed') }
@@ -43,6 +47,10 @@ fn (tokens []Token) interpret() ! {
 					s.push(false_value)
 				}
 			}
+			End {
+				// --
+				// Nothing to do. It is just a label for the IF block
+			}
 			False {
 				s.push(false_value)
 			}
@@ -57,6 +65,14 @@ fn (tokens []Token) interpret() ! {
 					s.push(true_value)
 				} else {
 					s.push(false_value)
+				}
+			}
+			If {
+				// flag --
+				f := s.pop() or { return error('If: empty stack') }
+				if f == false_value {
+					token_idx = tok.end + 1 // jump right after the end
+					continue
 				}
 			}
 			Lth {
@@ -117,6 +133,11 @@ fn (tokens []Token) interpret() ! {
 			True {
 				s.push(true_value)
 			}
+		}
+
+		token_idx += 1
+		if token_idx >= tokens.len {
+			break
 		}
 	}
 }

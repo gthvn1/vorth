@@ -104,6 +104,8 @@ fn tokenize(src_fname string) ![]Token {
 	}
 	log.debug('==== PROGRAM LOADED')
 
+	mut blocks := init_stack() // Keep track of starts blocks
+
 	mut toks := []Token{}
 	mut lexer := Lexer{
 		input: prog_str
@@ -147,6 +149,15 @@ fn tokenize(src_fname string) ![]Token {
 			`>` {
 				toks << Token(Gth{})
 			}
+			`]` {
+				// We need to update the IF that is at the top of the blocks stack
+				// with the current position of this end of block
+				if_idx := blocks.pop() or {
+					return lexer.tok_error('failed to find the begin block')
+				}
+				toks[if_idx] = Token(If{toks.len})
+				toks << Token(End{})
+			}
 			`/` {
 				if lexer.peek_char() == `/` {
 					// Skip comments ends on `\n` so don't continue because we need to
@@ -165,6 +176,19 @@ fn tokenize(src_fname string) ![]Token {
 				} else {
 					// Just log the identifier that starts with !
 					return lexer.tok_error('only != is expected')
+				}
+			}
+			`?` {
+				if lexer.peek_char() == `[` {
+					lexer.read_char()
+					// Keep track of the index of the If. We store it before adding it
+					// to the array so we don't need to substract 1.
+					blocks.push(toks.len)
+					toks << Token(If{})
+					// No need to continue because we only read the = character
+				} else {
+					// Just log the identifier that starts with !
+					return lexer.tok_error('only ?[ is expected')
 				}
 			}
 			else {

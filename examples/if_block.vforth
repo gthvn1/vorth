@@ -1,12 +1,6 @@
 // if_block.vforth
-// !!! NOT YET IMPLEMENTED !!!
 
-10 13 >           // false
-dup neg swap      // true false
-?[
-  10 13 -
-]
-?[  10 13 +
-]
-
-.
+true ?[ 10 11 + ]
+false ?[ 2 3 + ]
+true ?[ 21 + ]
+. // should print 42

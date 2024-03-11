@@ -22,8 +22,9 @@
 | `!=`      | a b -- Flag            | True if a != b, False otherwise
 | `<`       | a b -- Flag            | True if a < b, False otherwise
 | `>`       | a b -- Flag            | True if a > b, False otherwise
+| `.`       | a --                   |
+| `?[...]`  | Flag --                | If True the block is executed
 | divmod    | a b -- (a / b) (a % b) |
-| dot       | a --                   |
 | dup       | a -- a a               |
 | *integer* | -- a                   | *integer* is i64
 | not       | Flag -- not Flag       | Inverse True and False
@@ -82,7 +83,7 @@ log level is set to 5
 - [x] update lexer to recognize `true`, `false`, `eq`, `neq`
 - [x] implement new tokens ^^
 - [x] allow comments
-- [ ] add if
+- [x] add conditionnal blocks
 - [ ] add loop
 - [ ] what else to be Turing complete?
     - [ ] Run [Game Of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) to prove the Turing completeness
@@ -90,6 +91,7 @@ log level is set to 5
 ## Changelog
 
 ### 2024-03-10
+- Adding conditionnal blocks
 - Report `filename:line:col:<error msg>` in case of error
 
 ### 2024-03-07

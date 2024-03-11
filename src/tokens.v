@@ -11,8 +11,16 @@ struct Dup {}
 
 struct Eq {}
 
+// End of a block
+struct End {}
+
 // Greater than
 struct Gth {}
+
+struct If {
+mut:
+	end int // The position in the array of tokens of the end of the if block
+}
 
 // Lower than
 struct Lth {}
@@ -39,9 +47,11 @@ type Token = Add
 	| Divmod
 	| Dot
 	| Dup
+	| End
 	| Eq
 	| False
 	| Gth
+	| If
 	| Lth
 	| Mul
 	| Neq

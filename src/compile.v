@@ -94,6 +94,9 @@ fn (tokens []Token) compile(fname string) {
         push rax
         push rax\n'
 			}
+			End {
+				code += '        ;; END not implemented'
+			}
 			Eq {
 				code += '        ;; EQ generated
         mov rcx, ${false_value}
@@ -117,6 +120,9 @@ fn (tokens []Token) compile(fname string) {
         cmp rax, rbx
         cmovg rcx, rdx ; if rax > rbx then rcx <- true
         push rcx\n'
+			}
+			If {
+				code += '        ;; IF not implemented'
 			}
 			Lth {
 				code += '        ;; LTH generated

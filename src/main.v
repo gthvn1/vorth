@@ -14,6 +14,7 @@ fn main() {
 	compile := fp.bool('compile', `c`, false, 'compile the given file')
 	interpret := fp.bool('interpret', `i`, false, 'run the interpreter on the given file')
 	debug := fp.int('debug', `d`, 4, 'set debug level (max: 5, default is info (4))')
+	show_tokens := fp.bool('show-tokens', `s`, false, 'show tokens after tokenization')
 
 	println('log level is set to ${debug}')
 
@@ -36,6 +37,11 @@ fn main() {
 	prog := tokenize(src_fname) or {
 		log.error('tokenizer failed: ' + err.str())
 		exit(1)
+	}
+
+	if show_tokens {
+		// TODO: pretty prints tokens
+		println(prog)
 	}
 
 	if interpret {
