@@ -5,6 +5,16 @@ struct Add {}
 
 struct Divmod {}
 
+struct Do {
+mut:
+	out int
+}
+
+struct Done {
+mut:
+	begin int
+}
+
 struct Dot {}
 
 struct Dup {}
@@ -48,8 +58,12 @@ struct Swap {}
 
 struct True {}
 
+struct While {}
+
 type Token = Add
 	| Divmod
+	| Do
+	| Done
 	| Dot
 	| Dup
 	| Else
@@ -66,3 +80,30 @@ type Token = Add
 	| Sub
 	| Swap
 	| True
+	| While
+
+fn (t Token) str() string {
+	return match t {
+		Add { 'add' }
+		Divmod { 'divmod' }
+		Do { 'do:${t.out}' }
+		Done { 'done:${t.begin}' }
+		Dot { 'dot' }
+		Dup { 'dup' }
+		Else { 'else:${t.out}' }
+		End { 'end' }
+		Eq { 'eq' }
+		False { 'false' }
+		Gth { 'gth' }
+		If { 'if:${t.out}' }
+		Lth { 'lth' }
+		Mul { 'mul' }
+		Neq { 'neq' }
+		Not { 'not' }
+		Push { 'push:${t.v}' }
+		Sub { 'sub' }
+		Swap { 'swap' }
+		True { 'true' }
+		While { 'while' }
+	}
+}

@@ -83,6 +83,12 @@ fn (tokens []Token) compile(fname string) {
         push rax
         push rdx\n'
 			}
+			Do {
+				code += '        :: DO is not implemented'
+			}
+			Done {
+				code += '        :: DONE is not implemented'
+			}
 			Dot {
 				code += '        ;; DOT generated
         pop rdi
@@ -184,6 +190,9 @@ fn (tokens []Token) compile(fname string) {
 			True {
 				code += '        ;; TRUE generated
         push ${true_value}\n'
+			}
+			While {
+				code += '        :: DONE is not implemented'
 			}
 		}
 	}

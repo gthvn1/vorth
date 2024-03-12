@@ -24,6 +24,12 @@ fn (tokens []Token) interpret() ! {
 				s.push(a / b)
 				s.push(a % b)
 			}
+			Do {
+				return error('Do: not yet implemented')
+			}
+			Done {
+				return error('Done: not yet implemented')
+			}
 			Dot { // a --
 				if v := s.pop() {
 					println(v)
@@ -139,6 +145,9 @@ fn (tokens []Token) interpret() ! {
 			}
 			True {
 				s.push(true_value)
+			}
+			While {
+				return error('While: not yet implemented')
 			}
 		}
 

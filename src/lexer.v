@@ -12,6 +12,12 @@ mut:
 	src      string
 }
 
+fn print_tokens(toks []Token) {
+	for i, t in toks {
+		log.info('${i:03}: ' + t.str())
+	}
+}
+
 fn (mut l Lexer) tok_error(err string) ![]Token {
 	return error(l.src + ':' + l.line.str() + ':' + l.column.str() + ':' + err)
 }
@@ -180,7 +186,30 @@ fn tokenize(src_fname string) ![]Token {
 
 				if lexer.ch.is_letter() {
 					ident := lexer.read_identifier()
-					if ident == 'if' {
+					if ident == 'while' {
+						blocks.push(toks.len) // Keep track of the position of the while
+						toks << Token(While{})
+					} else if ident == 'do' {
+						blocks.push(toks.len) // Also keep track of the do.
+						toks << Token(Do{})
+					} else if ident == 'done' {
+						do_idx := blocks.pop() or {
+							return lexer.tok_error('done: expected a token Do found empty')
+						}
+						while_idx := blocks.pop() or {
+							return lexer.tok_error('done: expected a token While found empty')
+						}
+						// Update Do with the address of the current done
+						match toks[do_idx] {
+							Do {
+								toks[do_idx] = Token(Do{toks.len})
+							}
+							else {
+								return lexer.tok_error('done: token Do not found')
+							}
+						}
+						toks << Token(Done{int(while_idx)})
+					} else if ident == 'if' {
 						// Keep track of the index of the If. We store it before adding it
 						// to the array so we don't need to substract 1.
 						blocks.push(toks.len)

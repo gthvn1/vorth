@@ -40,8 +40,8 @@ fn main() {
 	}
 
 	if show_tokens {
-		// TODO: pretty prints tokens
-		println(prog)
+		log.info('Print tokens')
+		print_tokens(prog)
 	}
 
 	if interpret {
