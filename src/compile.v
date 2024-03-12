@@ -94,6 +94,9 @@ fn (tokens []Token) compile(fname string) {
         push rax
         push rax\n'
 			}
+			Else {
+				code += '        ;; ELSE not implemented'
+			}
 			End {
 				code += '        ;; END not implemented'
 			}

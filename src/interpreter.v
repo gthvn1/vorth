@@ -36,6 +36,13 @@ fn (tokens []Token) interpret() ! {
 				s.push(a)
 				s.push(a)
 			}
+			Else {
+				// --
+				// we just need to skip the else part
+				token_idx = tok.out // jump at the end that does nothing so don't
+				// need to jump after
+				continue
+			}
 			Eq {
 				// a b -- Flag
 				// (True if a == b, False otherwise)
@@ -49,7 +56,7 @@ fn (tokens []Token) interpret() ! {
 			}
 			End {
 				// --
-				// Nothing to do. It is just a label for the IF block
+				// Nothing to do. It is just a label for the IF or ELSE block
 			}
 			False {
 				s.push(false_value)

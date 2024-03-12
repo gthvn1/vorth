@@ -13,22 +13,26 @@
 
 ## List of operators
 
-| Operators | stack state            | Description
-| --------- | ---------------------- | ------------
-| `+`       | a b -- (a + b)         |
-| `*`       | a b -- (a * b)         |
-| `-`       | a b -- (a - b)         |
-| `=`       | a b -- Flag            | True if a == b, False otherwise
-| `!=`      | a b -- Flag            | True if a != b, False otherwise
-| `<`       | a b -- Flag            | True if a < b, False otherwise
-| `>`       | a b -- Flag            | True if a > b, False otherwise
-| `.`       | a --                   |
-| `?[...]`  | Flag --                | If True the block is executed
-| divmod    | a b -- (a / b) (a % b) |
-| dup       | a -- a a               |
-| *integer* | -- a                   | *integer* is i64
-| not       | Flag -- not Flag       | Inverse True and False
-| swap      | a b -- b a             |
+| Operators | stack state             | Description
+|-----------|-------------------------|----------------------------------------
+| `+`       |   a b -- (a + b)        |
+| `*`       |   a b -- (a * b)        |
+| `-`       |   a b -- (a - b)        |
+| `=`       |   a b -- Flag           | True if a == b, False otherwise
+| `!=`      |   a b -- Flag           | True if a != b, False otherwise
+| `<`       |   a b -- Flag           | True if a < b, False otherwise
+| `>`       |   a b -- Flag           | True if a > b, False otherwise
+| `.`       |   a   --                |
+|-----------|-------------------------|----------------------------------------
+| if        | flag --                 | If True then it continues, otherwise
+| else      |      --                 | it jumps to execute the then. If then
+| end       |      --                 | is reached it jumps to end.
+|-----------|-------------------------|----------------------------------------
+| divmod    |  a b -- (a / b) (a % b) |
+| dup       |    a -- a a             |
+| *integer* |      -- a               | *integer* is i64
+| not       | Flag -- not Flag        | Inverse True and False
+| swap      |  a b -- b a             |
 
 ## Example
 
@@ -91,7 +95,7 @@ log level is set to 5
 ## Changelog
 
 ### 2024-03-10
-- Adding conditionnal blocks
+- Adding conditionnal block `if ... else ... end`
 - Report `filename:line:col:<error msg>` in case of error
 
 ### 2024-03-07

@@ -9,6 +9,11 @@ struct Dot {}
 
 struct Dup {}
 
+struct Else {
+mut:
+	out int
+}
+
 struct Eq {}
 
 // End of a block
@@ -19,7 +24,7 @@ struct Gth {}
 
 struct If {
 mut:
-	out int // The position in the array of tokens of the end of the if block
+	out int
 }
 
 // Lower than
@@ -47,6 +52,7 @@ type Token = Add
 	| Divmod
 	| Dot
 	| Dup
+	| Else
 	| End
 	| Eq
 	| False

@@ -149,15 +149,6 @@ fn tokenize(src_fname string) ![]Token {
 			`>` {
 				toks << Token(Gth{})
 			}
-			`]` {
-				// We need to update the IF that is at the top of the blocks stack
-				// with the current position of this end of block
-				if_idx := blocks.pop() or {
-					return lexer.tok_error('failed to find the begin block')
-				}
-				toks[if_idx] = Token(If{toks.len})
-				toks << Token(End{})
-			}
 			`/` {
 				if lexer.peek_char() == `/` {
 					// Skip comments ends on `\n` so don't continue because we need to
@@ -178,19 +169,6 @@ fn tokenize(src_fname string) ![]Token {
 					return lexer.tok_error('only != is expected')
 				}
 			}
-			`?` {
-				if lexer.peek_char() == `[` {
-					lexer.read_char()
-					// Keep track of the index of the If. We store it before adding it
-					// to the array so we don't need to substract 1.
-					blocks.push(toks.len)
-					toks << Token(If{})
-					// No need to continue because we only read the = character
-				} else {
-					// Just log the identifier that starts with !
-					return lexer.tok_error('only ?[ is expected')
-				}
-			}
 			else {
 				if lexer.ch.is_digit() {
 					i := lexer.read_integer()!
@@ -202,7 +180,42 @@ fn tokenize(src_fname string) ![]Token {
 
 				if lexer.ch.is_letter() {
 					ident := lexer.read_identifier()
-					if tok := lookup(ident) {
+					if ident == 'if' {
+						// Keep track of the index of the If. We store it before adding it
+						// to the array so we don't need to substract 1.
+						blocks.push(toks.len)
+						toks << Token(If{})
+					} else if ident == 'else' {
+						// The else comes in relation to the if. If the if is false it must
+						// jump here. So we need to update the IF that is at the top of the
+						// blocks stack with the current position of this block
+						if_idx := blocks.pop() or {
+							return lexer.tok_error('failed to find the begin block')
+						}
+						toks[if_idx] = Token(If{toks.len})
+						// Now we need to keep track of the else when the end will be reach
+						blocks.push(toks.len)
+						toks << Token(Else{})
+					} else if ident == 'end' {
+						// We need to update the else or the if that is at the top of the
+						// blocks stack with the current position of this end of block
+						block_idx := blocks.pop() or {
+							return lexer.tok_error('failed to find a block')
+						}
+						match toks[block_idx] {
+							If {
+								toks[block_idx] = Token(If{toks.len})
+							}
+							Else {
+								toks[block_idx] = Token(Else{toks.len})
+							}
+							else {
+								return lexer.tok_error('expected If or Else')
+							}
+						}
+						// And finally push the end
+						toks << Token(End{})
+					} else if tok := lookup(ident) {
 						toks << tok
 					} else {
 						return lexer.tok_error('unknown identifier < ${ident} >')
