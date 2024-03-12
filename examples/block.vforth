@@ -27,8 +27,12 @@ end
 // LOOP
 // start end ![ ... ]
 
-// Example print 1 to 10
-//1 10 ![
-//  @   // push the current index on the stack
-//  .   // print it
-//]
+// Example countdown from 10 to 0
+10             //           -- 10
+while dup 0 >  // 10 10 0 > -- 10 true
+do             // 10 true   -- 10   if flag is false we jump right after 'done'
+  dup .        // 10 10     -- 10
+  1 -          // 10 1 -    -- 9    so we decrement the counter. And the loop
+               //                   will repeat until we reach 0
+done           // jump to 'while'
+.              // should print the last value that is 0
