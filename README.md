@@ -89,6 +89,7 @@ log level is set to 5
 - [x] allow comments
 - [x] add conditionnal blocks
 - [ ] add loop
+- [ ] manage memory
 - [ ] what else to be Turing complete?
     - [ ] Run [Game Of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) to prove the Turing completeness
 
