@@ -23,16 +23,23 @@
 | `<`       |   a b -- Flag           | True if a < b, False otherwise
 | `>`       |   a b -- Flag           | True if a > b, False otherwise
 | `.`       |   a   --                |
-|-----------|-------------------------|----------------------------------------
-| if        | flag --                 | If True then it continues, otherwise
-| else      |      --                 | it jumps to execute the then. If then
-| end       |      --                 | is reached it jumps to end.
-|-----------|-------------------------|----------------------------------------
 | divmod    |  a b -- (a / b) (a % b) |
 | dup       |    a -- a a             |
 | *integer* |      -- a               | *integer* is i64
 | not       | Flag -- not Flag        | Inverse True and False
 | swap      |  a b -- b a             |
+
+| Operators | stack state             | Description
+|-----------|-------------------------|----------------------------------------
+| if        | flag --                 | If True then it continues, otherwise
+| else      |      --                 | it jumps to execute the then. If then
+| end       |      --                 | is reached it jumps to end.
+
+| Operators | stack state             | Description
+|-----------|-------------------------|----------------------------------------
+| while     |      --                 | If True then do continues, otherwise
+| do        | flag --                 | it jumps right after the done. Done 
+| done      |      --                 | jumps to while.
 
 ## Example
 
@@ -87,13 +94,19 @@ log level is set to 5
 - [x] update lexer to recognize `true`, `false`, `eq`, `neq`
 - [x] implement new tokens ^^
 - [x] allow comments
-- [x] add conditionnal blocks
-- [ ] add loop
+- [x] add conditionnal if (interpreter only)
+- [x] add while loop (interpreter only)
+- [ ] compiled version of blocks
 - [ ] manage memory
 - [ ] what else to be Turing complete?
     - [ ] Run [Game Of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) to prove the Turing completeness
 
 ## Changelog
+
+### 2024-03-12
+- Introduce the interpreted version of the while loop
+    - all tests are now running in interpreted mode
+    - blocks are not yet available in compiled mode
 
 ### 2024-03-10
 - Adding conditionnal block `if ... else ... end`

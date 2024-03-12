@@ -1,4 +1,3 @@
-// https://forth-standard.org/standard/core
 import log
 
 fn (tokens []Token) interpret() ! {
@@ -25,10 +24,16 @@ fn (tokens []Token) interpret() ! {
 				s.push(a % b)
 			}
 			Do {
-				return error('Do: not yet implemented')
+				// flag --
+				f := s.pop() or { return error('Do: empty stack') }
+				if f == false_value {
+					token_idx = tok.out + 1 // jump right after the end
+					continue
+				}
 			}
 			Done {
-				return error('Done: not yet implemented')
+				token_idx = tok.begin // into the while
+				continue
 			}
 			Dot { // a --
 				if v := s.pop() {
@@ -147,7 +152,8 @@ fn (tokens []Token) interpret() ! {
 				s.push(true_value)
 			}
 			While {
-				return error('While: not yet implemented')
+				// --
+				// Nothing to do. It is an anchor for the done
 			}
 		}
 
