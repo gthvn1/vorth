@@ -7,9 +7,9 @@
     - [Forth](https://forth-standard.org/)
     - [Uxn](https://wiki.xxiivv.com/site/uxn.html)
 
-- run: `v run . -c -i examples/arithmetic.vforth`
+- run: `v run . -c -i examples/arithmetic.vorth`
     - `-c` is to compile the code. That means you can run the test: `./examples/arithmetic`
-- or with debug logs: `v run . -c -i -d 5 examples/arithmetic.vforth`
+- or with debug logs: `v run . -c -i -d 5 examples/arithmetic.vorth`
 
 ## List of operators
 
@@ -45,10 +45,10 @@
 
 ```v
 ~/devel/vlang-forth master*
-❯ v run . -c -i -d 5 examples/arithmetic.vforth
+❯ v run . -c -i -d 5 examples/arithmetic.vorth
 log level is set to 5
 2024-03-08 22:05:41.692216 [DEBUG] ==== LOADING PROGRAM
-2024-03-08 22:05:41.692242 [DEBUG] // arithmetic.vforth
+2024-03-08 22:05:41.692242 [DEBUG] // arithmetic.vorth
 2024-03-08 22:05:41.692245 [DEBUG]
 2024-03-08 22:05:41.692249 [DEBUG] 12 30 + .      // should print 42
 2024-03-08 22:05:41.692251 [DEBUG] 6 9 - .        // should print -3
@@ -126,7 +126,7 @@ log level is set to 5
 
 ### 2024-03-05
 - Add a minimal help
-- Read the code from `arithmetic.vforth` and print the result
+- Read the code from `arithmetic.vorth` and print the result
 - Replace `Pop` by `Dot` to be more like Forth and translate string to ops
 - Add operations: `Add`, `Sub`, `Push` and `Pop`
 - First implement a stack in [V](https://github.com/vlang/v/blob/master/doc/docs.md)
