@@ -28,7 +28,7 @@ fn (tokens []Token) compile(fname string) {
         cmovs  rcx,rdi
         mov    edi,0x1e
         nop    WORD [rax+rax*1+0x0]
-    .label1
+    .label1:
         mov    rax,rcx
         mov    r10d,edi
         imul   r8
@@ -54,7 +54,7 @@ fn (tokens []Token) compile(fname string) {
         lea    esi,[rdx+0x2]
         mov    BYTE [rsp+rax*1],0x2d
         mov    eax,edi
-    .label2
+    .label2:
         mov    edx,esi
         mov    edi,0x1
         lea    rsi,[rsp+rax*1]
@@ -65,7 +65,7 @@ fn (tokens []Token) compile(fname string) {
 
 	code += '    _start:\n'
 
-	for tok in tokens {
+	for i, tok in tokens {
 		match tok {
 			Add {
 				code += '        ;; ADD generated
@@ -84,10 +84,10 @@ fn (tokens []Token) compile(fname string) {
         push rdx\n'
 			}
 			Do {
-				code += '        :: DO is not implemented'
+				code += '        ;; DO is not implemented'
 			}
 			Done {
-				code += '        :: DONE is not implemented'
+				code += '        ;; DONE is not implemented'
 			}
 			Dot {
 				code += '        ;; DOT generated
@@ -101,10 +101,13 @@ fn (tokens []Token) compile(fname string) {
         push rax\n'
 			}
 			Else {
-				code += '        ;; ELSE not implemented'
+				code += '        ;; ELSE generated
+        jmp .if_${tok.out}
+        .if_${i}:\n'
 			}
 			End {
-				code += '        ;; END not implemented'
+				code += '        ;; END generated
+        .if_${i}:\n'
 			}
 			Eq {
 				code += '        ;; EQ generated
@@ -131,7 +134,11 @@ fn (tokens []Token) compile(fname string) {
         push rcx\n'
 			}
 			If {
-				code += '        ;; IF not implemented'
+				code += '        ;; IF generated
+        mov rax, ${true_value}
+        pop rbx
+        cmp rax, rbx
+        jne .if_${tok.out}\n'
 			}
 			Lth {
 				code += '        ;; LTH generated
@@ -192,7 +199,7 @@ fn (tokens []Token) compile(fname string) {
         push ${true_value}\n'
 			}
 			While {
-				code += '        :: DONE is not implemented'
+				code += '        ;; DONE is not implemented'
 			}
 		}
 	}
