@@ -15,14 +15,14 @@
 
 | Operators | stack state             | Description
 |-----------|-------------------------|----------------------------------------
-| `+`       |   a b -- (a + b)        |
-| `*`       |   a b -- (a * b)        |
-| `-`       |   a b -- (a - b)        |
-| `=`       |   a b -- Flag           | True if a == b, False otherwise
-| `!=`      |   a b -- Flag           | True if a != b, False otherwise
-| `<`       |   a b -- Flag           | True if a < b, False otherwise
-| `>`       |   a b -- Flag           | True if a > b, False otherwise
-| `.`       |   a   --                |
+| `+`       |  a b -- (a + b)         |
+| `*`       |  a b -- (a * b)         |
+| `-`       |  a b -- (a - b)         |
+| `=`       |  a b -- Flag            | True if a == b, False otherwise
+| `!=`      |  a b -- Flag            | True if a != b, False otherwise
+| `<`       |  a b -- Flag            | True if a < b, False otherwise
+| `>`       |  a b -- Flag            | True if a > b, False otherwise
+| `.`       |  a   --                 |
 | divmod    |  a b -- (a / b) (a % b) |
 | dup       |    a -- a a             |
 | *integer* |      -- a               | *integer* is i64
@@ -94,14 +94,16 @@ log level is set to 5
 - [x] update lexer to recognize `true`, `false`, `eq`, `neq`
 - [x] implement new tokens ^^
 - [x] allow comments
-- [x] add conditionnal if (interpreter only)
-- [x] add while loop (interpreter only)
-- [ ] compiled version of blocks
+- [x] add conditionnal if
+- [x] add while loop
 - [ ] manage memory
 - [ ] what else to be Turing complete?
     - [ ] Run [Game Of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) to prove the Turing completeness
 
 ## Changelog
+
+### 2024-03-13
+- Conditionnal and loop are now compiled
 
 ### 2024-03-12
 - Introduce the interpreted version of the while loop

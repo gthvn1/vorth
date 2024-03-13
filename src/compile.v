@@ -84,10 +84,16 @@ fn (tokens []Token) compile(fname string) {
         push rdx\n'
 			}
 			Do {
-				code += '        ;; DO is not implemented'
+				code += '        ;; DO generated
+        mov rax, ${true_value}
+        pop rbx
+        cmp rax, rbx
+        jne .while_${tok.out}\n'
 			}
 			Done {
-				code += '        ;; DONE is not implemented'
+				code += '        ;; DONE generated
+        jmp .while_${tok.begin}
+        .while_${i}:\n'
 			}
 			Dot {
 				code += '        ;; DOT generated
@@ -199,7 +205,8 @@ fn (tokens []Token) compile(fname string) {
         push ${true_value}\n'
 			}
 			While {
-				code += '        ;; DONE is not implemented'
+				code += '        ;; WHILE generated
+        .while_${i}:\n'
 			}
 		}
 	}
