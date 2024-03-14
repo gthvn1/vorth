@@ -24,9 +24,6 @@ else
 end
 . // should print 5
 
-// LOOP
-// start end ![ ... ]
-
 // Example countdown from 10 to 0
 10             //           -- 10
 while dup 0 >  // 10 10 0 > -- 10 true
