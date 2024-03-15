@@ -1,0 +1,6 @@
+10
+0 STORE // 10 -- (10 is stored in memory 0)
+5       //    -- 5
+0 LOAD  // 5 -- 5 10 (10 is loaded from memory 0)
++       // 5 10 + -- 15
+.       // should print 15

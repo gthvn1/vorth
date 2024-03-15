@@ -146,6 +146,9 @@ fn (tokens []Token) compile(fname string) {
         cmp rax, rbx
         jne .if_${tok.out}\n'
 			}
+			Load {
+				code += '        ;; LOAD not yet implemented'
+			}
 			Lth {
 				code += '        ;; LTH generated
         mov rcx, ${false_value}
@@ -186,6 +189,9 @@ fn (tokens []Token) compile(fname string) {
 				code += '        ;; PUSH generated
         push ${tok.v}\n'
 			}
+			Store {
+				code += '        ;; STORE not yet implemented'
+			}
 			Sub {
 				code += '        ;; SUB generated
         pop rax
@@ -215,7 +221,10 @@ fn (tokens []Token) compile(fname string) {
         ;; exit(EXIT_SUCESS)
         mov rax, 60
         mov rdi, 0
-        syscall\n'
+        syscall
+
+    segment .bss:
+	mem: resb 1024\n'
 
 	// Then we can compile it
 	assembly := fname + '.s'

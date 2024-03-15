@@ -37,6 +37,8 @@ mut:
 	out int
 }
 
+struct Load {}
+
 // Lower than
 struct Lth {}
 
@@ -51,6 +53,8 @@ struct Mul {}
 struct Push {
 	v i64
 }
+
+struct Store {}
 
 struct Sub {}
 
@@ -72,11 +76,13 @@ type Token = Add
 	| False
 	| Gth
 	| If
+	| Load
 	| Lth
 	| Mul
 	| Neq
 	| Not
 	| Push
+	| Store
 	| Sub
 	| Swap
 	| True
@@ -96,11 +102,13 @@ fn (t Token) str() string {
 		False { 'false' }
 		Gth { 'gth' }
 		If { 'if:${t.out}' }
+		Load { 'load' }
 		Lth { 'lth' }
 		Mul { 'mul' }
 		Neq { 'neq' }
 		Not { 'not' }
 		Push { 'push:${t.v}' }
+		Store { 'store' }
 		Sub { 'sub' }
 		Swap { 'swap' }
 		True { 'true' }

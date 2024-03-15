@@ -89,8 +89,10 @@ fn lookup(s string) ?Token {
 		'divmod' { Token(Divmod{}) }
 		'dup' { Token(Dup{}) }
 		'false' { Token(False{}) }
+		'load' { Token(Load{}) }
 		'mul' { Token(Mul{}) }
 		'not' { Token(Not{}) }
+		'store' { Token(Store{}) }
 		'true' { Token(True{}) }
 		'swap' { Token(Swap{}) }
 		else { none }

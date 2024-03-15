@@ -93,6 +93,10 @@ fn (tokens []Token) interpret() ! {
 					continue
 				}
 			}
+			Load {
+				// addr --
+				return error('Load: not yet implemented')
+			}
 			Lth {
 				// a b -- Flag
 				// (True if a < b, False otherwise)
@@ -136,6 +140,10 @@ fn (tokens []Token) interpret() ! {
 			}
 			Push { // -- a
 				s.push(tok.v)
+			}
+			Store {
+				//  -- mem[addr]
+				return error('Store: not yet implemented')
 			}
 			Sub { // a b -- (a - b)
 				b := s.pop() or { return error('Sub: first pop failed') }
