@@ -1,7 +1,10 @@
 import log
 
+const memory_size = 1024
+
 fn (tokens []Token) interpret() ! {
 	mut s := init_stack()
+	mut mem := [memory_size]i64{}
 
 	mut token_idx := 0
 
@@ -94,8 +97,9 @@ fn (tokens []Token) interpret() ! {
 				}
 			}
 			Load {
-				// addr --
-				return error('Load: not yet implemented')
+				// addr -- mem[addr]
+				addr := s.pop() or { return error('Store: failed to read address') }
+				s.push(mem[addr])
 			}
 			Lth {
 				// a b -- Flag
@@ -142,8 +146,13 @@ fn (tokens []Token) interpret() ! {
 				s.push(tok.v)
 			}
 			Store {
-				//  -- mem[addr]
-				return error('Store: not yet implemented')
+				// val addr --
+				addr := s.pop() or { return error('Store: failed to read address') }
+				val := s.pop() or { return error('Store: failed to read value') }
+				if addr >= memory_size {
+					return error('memory overflow')
+				}
+				mem[addr] = val
 			}
 			Sub { // a b -- (a - b)
 				b := s.pop() or { return error('Sub: first pop failed') }
