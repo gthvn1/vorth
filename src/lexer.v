@@ -106,11 +106,11 @@ fn tokenize(src_fname string) ![]Token {
 	}
 
 	prog_str := os.read_file(src_fname)!
-	log.debug('==== LOADING PROGRAM')
+	log.debug('==== LOADING PROGRAM ====')
 	for l in prog_str.split('\n') {
 		log.debug(l)
 	}
-	log.debug('==== PROGRAM LOADED')
+	log.debug('==== PROGRAM LOADED ====')
 
 	mut blocks := init_stack() // Keep track of starts blocks
 

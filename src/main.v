@@ -14,7 +14,7 @@ fn main() {
 	compile := fp.bool('compile', `c`, false, 'compile the given file')
 	interpret := fp.bool('interpret', `i`, false, 'run the interpreter on the given file')
 	debug := fp.int('debug', `d`, 4, 'set debug level (max: 5, default is info (4))')
-	show_tokens := fp.bool('show-tokens', `s`, false, 'show tokens after tokenization')
+	show_tokens := fp.bool('tokens', `t`, false, 'print tokens after tokenization')
 
 	println('log level is set to ${debug}')
 
@@ -40,7 +40,7 @@ fn main() {
 	}
 
 	if show_tokens {
-		log.info('Print tokens')
+		log.info('==== PRINT TOKENS ====')
 		print_tokens(prog)
 	}
 
