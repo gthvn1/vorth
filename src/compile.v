@@ -15,6 +15,7 @@ fn (tokens []Token) compile(fname string) {
     ;;   - replace the call to write by a syscall
     BITS 64
     global _start
+
     section .text
 
     dump:
@@ -147,7 +148,11 @@ fn (tokens []Token) compile(fname string) {
         jne .if_${tok.out}\n'
 			}
 			Load {
-				code += '        ;; LOAD not yet implemented'
+				code += '        ;; LOAD generated
+        pop rax     ; first we pop the offset from mem
+        shl rax, 3  ; working on quad so idx = idx * 8
+        mov rbx, QWORD [rax + mem]
+        push rbx\n'
 			}
 			Lth {
 				code += '        ;; LTH generated
@@ -190,7 +195,11 @@ fn (tokens []Token) compile(fname string) {
         push ${tok.v}\n'
 			}
 			Store {
-				code += '        ;; STORE not yet implemented'
+				code += '        ;; STORE generated
+        pop rax  ; first we pop the offset from mem
+        shl rax, 3  ; working on quad so idx = idx * 8
+        pop rbx
+        mov QWORD [rax + mem], rbx\n'
 			}
 			Sub {
 				code += '        ;; SUB generated
@@ -223,7 +232,7 @@ fn (tokens []Token) compile(fname string) {
         mov rdi, 0
         syscall
 
-    segment .bss:
+    section .bss
 	mem: resb 1024\n'
 
 	// Then we can compile it

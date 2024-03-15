@@ -3,4 +3,10 @@
 5       //    -- 5
 0 LOAD  // 5 -- 5 10 (10 is loaded from memory 0)
 +       // 5 10 + -- 15
+1 STORE // 15 -- (15 is stored in memory 1)
+42
+.       // should print 42
+1 LOAD  //  -- 15
 .       // should print 15
+0 LOAD  //  -- 10
+.       // should print 10

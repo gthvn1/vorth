@@ -27,7 +27,9 @@
 | divmod    |  a b -- (a / b) (a % b) |
 | dup       |    a -- a a             |
 | *integer* |      -- a               | *integer* is i64
+| load      |    a -- mem[a]          | Put on the stack the value at mem[a]
 | not       | Flag -- not Flag        | Inverse True and False
+| store     |  v a --                 | Store v in mem[a]
 | swap      |  a b -- b a             |
 
 | Operators | stack state             | Description
@@ -97,11 +99,15 @@ log level is set to 5
 - [x] allow comments
 - [x] add conditionnal if
 - [x] add while loop
-- [ ] manage memory
+- [x] manage memory
 - [ ] what else to be Turing complete?
     - [ ] Run [Game Of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) to prove the Turing completeness
 
 ## Changelog
+
+### 2024-03-16
+- Implement Load and Store in memory
+    - memory is 1024 bytes
 
 ### 2024-03-13
 - Conditionnal and loop are now compiled
