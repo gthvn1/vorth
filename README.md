@@ -10,6 +10,7 @@
 - run: `v run . -c -i examples/arithmetic.vorth`
     - `-c` is to compile the code. That means you can run the test: `./examples/arithmetic`
 - or with debug logs: `v run . -c -i -d 5 examples/arithmetic.vorth`
+- The language is case insensitive
 
 ## List of operators
 

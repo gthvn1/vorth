@@ -85,7 +85,7 @@ fn (mut l Lexer) skip_comments() {
 }
 
 fn lookup(s string) ?Token {
-	return match s {
+	return match s.to_lower() {
 		'divmod' { Token(Divmod{}) }
 		'dup' { Token(Dup{}) }
 		'false' { Token(False{}) }
@@ -185,7 +185,7 @@ fn tokenize(src_fname string) ![]Token {
 				}
 
 				if lexer.ch.is_letter() {
-					ident := lexer.read_identifier()
+					ident := lexer.read_identifier().to_lower()
 					if ident == 'while' {
 						blocks.push(toks.len) // Keep track of the position of the while
 						toks << Token(While{})
