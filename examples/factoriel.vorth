@@ -1,0 +1,14 @@
+// Factoriel 20
+// 20 x 19 x 18 x ... x 2
+
+1 0 STORE      //              --       (mem[0] := 1)
+20             //              -- 20
+WHILE DUP 1 >  // 20           -- 20 true
+DO             // 20 true      -- 20    (if flag is false we jump right after 'done')
+  DUP          // 20           -- 20 20
+  0 LOAD       // 20 20        -- 20 20 mem[0]
+  * 0 STORE    // 20 20 mem[0] -- 20    (mem[0] *= 20)
+  1 -          // 20           -- 19    so we decrement the counter. And the loop
+               //                       will repeat until we reach 1
+DONE           // jump to 'while'
+0 LOAD .       // should print 2432902008176640000
